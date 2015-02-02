@@ -16,13 +16,17 @@ public class Graphicsrun extends JPanel {
     private class Node{
         String fName;
         String lName;
-        Node parent;
+        Node mother;
+        Node father;
+        Node spouse;
         Node child;
         
         Node(String first, String last){
             fName = first;
             lName = last;
-            parent = null;
+            mother = null;
+            father = null;
+            spouse = null;
             child = null;
         }
     }

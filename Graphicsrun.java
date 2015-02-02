@@ -16,6 +16,7 @@ public class Graphicsrun extends JPanel {
     private class Node{
         String fName;
         String lName;
+        Int age; 
         Node mother;
         Node father;
         Node spouse;

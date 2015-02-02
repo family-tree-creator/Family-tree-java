@@ -17,6 +17,7 @@ public class Graphicsrun extends JPanel {
         String fName;
         String lName;
         int age;
+        int birth; 
         Node mother;
         Node father;
         Node spouse;
@@ -26,6 +27,7 @@ public class Graphicsrun extends JPanel {
             fName = first;
             lName = last;
             age = 0;
+            birth = 0;
             mother = null;
             father = null;
             spouse = null;

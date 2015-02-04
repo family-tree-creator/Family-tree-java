@@ -23,20 +23,24 @@ public class Graphicsrun extends JPanel {
         String fName;
         String lName;
         int age;
+        char gender;
         int birth; 
+        int death;
         Node mother;
         Node father;
-        Node spouse;
+        List<Node> spouse;
         List<Node> child;
         
         Node(String first, String last){
             fName = first;
             lName = last;
             age = 0;
+            gender = ' ';
             birth = 0;
+            death = 0; 
             mother = null;
             father = null;
-            spouse = null;
+            spouse = new ArrayList();
             child = new ArrayList();
         }
     }

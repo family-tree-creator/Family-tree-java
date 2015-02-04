@@ -11,6 +11,8 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.List;
+import java.util.ArrayList;
 /**
  *
  * @author daniposi
@@ -25,7 +27,7 @@ public class Graphicsrun extends JPanel {
         Node mother;
         Node father;
         Node spouse;
-        Node child;
+        List<Node> child;
         
         Node(String first, String last){
             fName = first;
@@ -35,10 +37,13 @@ public class Graphicsrun extends JPanel {
             mother = null;
             father = null;
             spouse = null;
-            child = null;
+            child = new ArrayList();
         }
     }
     
+    public void addChild(Node p, Node c){
+       p.child.add(c);
+    }
     
     
     public void paintComponent(Graphics g){
@@ -47,8 +52,11 @@ public class Graphicsrun extends JPanel {
         
         Node A = new Node("Will","Smith");
         Node B = new Node("Jada","Pinkett");
-        Node C = new Node("Willow","Smith");
-                
+        Node C = new Node("Willow","Smith");  
+               
+        addChild(A,C);
+        System.out.println((A.child.get(0)).fName);
+
         g.setColor(Color.YELLOW);
         
         g.fillRect(100,25,175,80);
@@ -58,7 +66,7 @@ public class Graphicsrun extends JPanel {
         g.setColor(Color.BLACK);
         g.drawLine(275,65,350,65);
         g.drawLine(312,65,312,250);
-        
+       
         g.setColor(Color.RED);
         g.drawString(A.fName + " " + A.lName ,160,70);
         g.drawString(B.fName + " " + B.lName,410,70);

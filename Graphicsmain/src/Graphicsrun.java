@@ -29,8 +29,9 @@ public class Graphicsrun extends JPanel implements MouseListener{
         Node father;
         List<Node> spouse;
         List<Node> child;
+        Rectangle box;
         
-        Node(String first, String last){
+        Node(String first, String last, int x, int y){
             fName = first;
             lName = last;
             age = 0;
@@ -41,6 +42,7 @@ public class Graphicsrun extends JPanel implements MouseListener{
             father = null;
             spouse = new ArrayList();
             child = new ArrayList();
+            box = new Rectangle(x,y,175,80);
         }
     }
     
@@ -59,16 +61,19 @@ public class Graphicsrun extends JPanel implements MouseListener{
         
         addMouseListener(this);
         
-        Node A = new Node("Will","Smith");
-        Node B = new Node("Jada","Pinkett");
-        Node C = new Node("Willow","Smith");  
-               
+        g.setColor(Color.YELLOW);
+        Node A = new Node("Will","Smith",100,25);
+        Node B = new Node("Jada","Pinkett",350,25);
+        Node C = new Node("Willow","Smith",225,250);  
+        
+        //g.fillRect(A.box.getX(),A.box.getY(),A.box.getWidth(),A.box.getHeight());
+        
         addChild(A,C);
         System.out.println((A.child.get(0)).fName);
         
-        createBox(g,A,100,25);
-        createBox(g,B,350,25);
-        createBox(g,C,225,250);
+        //createBox(g,A,100,25);
+        //createBox(g,B,350,25);
+        //createBox(g,C,225,250);
   
         g.setColor(Color.BLACK);
         g.drawLine(275,65,350,65);

@@ -1,6 +1,14 @@
 # Family-tree-java
-# Hopefully this works
-does it work
-#it does
-#computer changes
-#computer changes 2
+Name (first, last)
+gender
+birth
+death
+city born
+city died
+spouse multiple
+children multipule
+parent (at most 2)
+
+(may all have blanks)
+
+First; Last; gener; birth; city born; death; city death; parents (father, mother); spouses(first [children(first, second,...], second(children[]))

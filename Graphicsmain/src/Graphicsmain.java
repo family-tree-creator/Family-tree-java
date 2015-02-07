@@ -15,14 +15,14 @@ import javax.swing.*;
 
 public class Graphicsmain {
     public static void main(String[] args){
-        JFrame f = new JFrame("Title");
+        JFrame f = new JFrame("Family Tree");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Graphicsrun gr = new Graphicsrun();
         f.add(gr);
         f.setSize(800,700);
         f.setVisible(true);
     }
-    
+  
     public void Import(String s){
         FileReader in = null;
         try{

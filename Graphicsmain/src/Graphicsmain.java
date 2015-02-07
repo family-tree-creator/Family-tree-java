@@ -8,6 +8,9 @@
  *
  * @author daniposi
  */
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.*;
 
 public class Graphicsmain {
@@ -18,5 +21,20 @@ public class Graphicsmain {
         f.add(gr);
         f.setSize(800,700);
         f.setVisible(true);
+    }
+    
+    public void Import(String s){
+        FileReader in = null;
+        try{
+            in = new FileReader(s);
+            BufferedReader br = new BufferedReader(in);
+            String check;
+            while((check = br.readLine()) != null){
+                System.out.println(check);
+            }
+            in.close();
+        }catch(IOException failRead) { //add catch for unable to open file
+            System.err.println(failRead.getMessage());
+        }
     }
 }

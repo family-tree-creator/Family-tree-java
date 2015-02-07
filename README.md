@@ -11,4 +11,4 @@ parent (at most 2)
 
 (may all have blanks)
 
-First; Last; gener; birth; city born; death; city death; parents (father, mother); spouses(first [children(first, second,...], second(children[]))
+First; Last; gener; birth; city born; death; city death; father; mother; spouses(first [children(first, second,...], second(children[]))

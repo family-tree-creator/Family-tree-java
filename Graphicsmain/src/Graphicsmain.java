@@ -37,4 +37,10 @@ public class Graphicsmain {
             System.err.println(failRead.getMessage());
         }
     }
+    
+    public void testTree(){
+        NodeTree N = new NodeTree();
+        N.addNode("A", "Az");
+        
+    }
 }

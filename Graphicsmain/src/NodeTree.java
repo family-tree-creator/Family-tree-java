@@ -71,20 +71,40 @@ public class NodeTree {
     
         //fields for NodeTree class
         public Node root;
+        public Node curr;
         public int familySize;
         
         //constructor for NodeTree
         public NodeTree(){
             root = null;
+            curr = null;
             familySize = 0;
         }
         
         //Operations
-        public void addRoot(String first, String last){
+        public void addNode(String first, String last){
             Node N = new Node(first,last);
             if(familySize == 0){
                 root = N; 
             }
+        }
+        public void addNode(String first, String last, String ffirst, String flast, String mfirst, String mlast){
+            Node N = new Node(first,last);
+            Node F = new Node(ffirst, flast);
+            Node M = new Node(mfirst, flast);
+            addMother(N,M);
+            addFather(N,F);
+            Node temp;
+            if(familySize == 0){
+                root = N; 
+            } else {
+                temp = findPerson(root,null, ffirst, flast);
+                if(temp != null){
+                    //do stuff
+                }
+            }
+            curr = N;
+            
         }
         
         public void addFname(Node p, String first){

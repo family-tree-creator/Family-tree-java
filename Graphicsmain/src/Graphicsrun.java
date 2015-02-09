@@ -30,7 +30,7 @@ public class Graphicsrun extends JPanel implements MouseListener{
         addMouseListener(this);
        
         NodeTree N = new NodeTree(); 
-        N.addRoot("Will","Smith");
+        N.addNode("Will","Smith");
         N.addGender(N.root,'m');
         N.addChild(N.root,"Willow","Smith");
         N.addGender(N.root.child.get(0),'f');

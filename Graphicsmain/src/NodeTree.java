@@ -84,6 +84,7 @@ public class NodeTree {
             Node N = new Node(first,last);
             if(familySize == 0){
                 root = N; 
+                familySize++;
             }
         }
         
@@ -105,6 +106,7 @@ public class NodeTree {
         public void addGender(Node p, char g){
             //check if f or m
             p.gender = g;
+            
         }
         
         public void addMother(Node c, Node m){
@@ -121,7 +123,18 @@ public class NodeTree {
         
         public void addChild(Node P, String first, String last){
             Node C = new Node(first,last);
+            
+            //add if statement to check if child already child of parent
+            for(int i = 0; i < P.child.size(); i++){
+                if (first == P.child.get(i).fName){
+                    return;
+                }    
+            }
+            System.out.println("testing");
             P.child.add(C);
+            familySize++;
+            
+            //if parent has gender, associate as father or mother
             if (P.gender == 'm'){
                 addFather(C,P);
             }else if (P.gender == 'f'){

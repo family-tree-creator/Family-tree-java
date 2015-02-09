@@ -36,7 +36,10 @@ public class Graphicsrun extends JPanel implements MouseListener{
         N.addGender(N.root.child.get(0),'f');
         System.out.println(N.root.child.get(0).father.fName);
         
-      //Node A = new Node("Will","Smith",100,25);
+        N.addChild(N.root,"Willow","Smith");
+        System.out.println(N.familySize);
+        
+      //  Node A = new Node("Will","Smith",100,25);
       //  Node B = new Node("Jada","Pinkett",350,25);
       //  Node C = new Node("Willow","Smith",225,250);  
         

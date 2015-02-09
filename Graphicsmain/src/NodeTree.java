@@ -13,6 +13,7 @@ import java.util.List;
  * @author Crazypinata
  */
 public class NodeTree {
+  
     private class Node{
         String fName;
         String lName;
@@ -25,6 +26,7 @@ public class NodeTree {
         List<Node> spouse;
         List<Node> child;
         
+        //constructor w/ no parameters
         Node(){
             fName = "";
             lName = "";
@@ -37,6 +39,8 @@ public class NodeTree {
             spouse = new ArrayList();
             child = new ArrayList();
         }
+        
+        //constructor w/ parameters for Names
         Node(String first, String last){
             fName = first;
             lName = last;
@@ -49,6 +53,8 @@ public class NodeTree {
             spouse = new ArrayList();
             child = new ArrayList();
         }
+        
+        //constructor w/ parameter for Names and Age
         Node(String first, String last,int a){
             fName = first;
             lName = last;
@@ -61,6 +67,21 @@ public class NodeTree {
             spouse = new ArrayList();
             child = new ArrayList();
         }
+    }
+    
+        //field for NodeTree class
+        public Node root;
+        
+        //constructor for NodeTree
+        public NodeTree(){
+            root = null;
+        }
+        
+        //Operations
+        public void createRoot(NodeTree N){
+            Node R = new Node("","",-1);
+            N.root = R;
+        }     
         
         public void addFname(Node p, String first){
             //check != null
@@ -97,8 +118,10 @@ public class NodeTree {
         public void addChild(Node p, Node c){
             p.child.add(c);
         }
-    }
     
-    
+        public String printName(Node p){
+          String s = p.fName + ", " + p.lName;
+          return s;
+        }
     
 }

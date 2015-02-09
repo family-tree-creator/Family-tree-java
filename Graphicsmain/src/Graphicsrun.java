@@ -18,39 +18,11 @@ import java.util.ArrayList;
  */
 public class Graphicsrun extends JPanel implements MouseListener{
 
-    private class Node{
-        String fName;
-        String lName;
-        int age;
-        char gender;
-        int birth; 
-        int death;
-        Node mother;
-        Node father;
-        List<Node> spouse;
-        List<Node> child;
-        Rectangle box;
-        
-        Node(String first, String last, int x, int y){
-            fName = first;
-            lName = last;
-            age = 0;
-            gender = ' ';
-            birth = 0;
-            death = 0; 
-            mother = null;
-            father = null;
-            spouse = new ArrayList();
-            child = new ArrayList();
-            box = new Rectangle(x,y,175,80);
-        }
-    }
+//    public void addChild(Node p, Node c){
+ //      p.child.add(c);
+  //  }
     
-    public void addChild(Node p, Node c){
-       p.child.add(c);
-    }
-    
-    public void createBox(Graphics g, Node p, int x, int y){
+    public void createBox(Graphics g, int x, int y){
         g.setColor(Color.YELLOW);
         g.fillRect(x,y,175,80);
     }
@@ -60,29 +32,36 @@ public class Graphicsrun extends JPanel implements MouseListener{
         this.setBackground(Color.WHITE);
         
         addMouseListener(this);
+       
+        NodeTree N = new NodeTree(); 
+        N.createRoot(N);
+        N.addFname(N.root,"Will");
+        N.addLname(N.root,"Smith");
+        N.addGender(N.root,'m');
         
-        g.setColor(Color.YELLOW);
-        Node A = new Node("Will","Smith",100,25);
-        Node B = new Node("Jada","Pinkett",350,25);
-        Node C = new Node("Willow","Smith",225,250);  
         
-        //g.fillRect(A.box.getX(),A.box.getY(),A.box.getWidth(),A.box.getHeight());
+       // N.addChild(N.root, );
         
-        addChild(A,C);
-        System.out.println((A.child.get(0)).fName);
+      //Node A = new Node("Will","Smith",100,25);
+      //  Node B = new Node("Jada","Pinkett",350,25);
+      //  Node C = new Node("Willow","Smith",225,250);  
         
-        //createBox(g,A,100,25);
-        //createBox(g,B,350,25);
-        //createBox(g,C,225,250);
+      //  addChild(A,C);
+      //  System.out.println((A.child.get(0)).fName);
+        
+        createBox(g,100,25);
+        createBox(g,350,25);
+        createBox(g,225,250);
   
         g.setColor(Color.BLACK);
         g.drawLine(275,65,350,65);
         g.drawLine(312,65,312,250);
        
         g.setColor(Color.RED);
-        g.drawString(A.fName + " " + A.lName ,160,70);
-        g.drawString(B.fName + " " + B.lName,410,70);
-        g.drawString(C.fName + " " + C.lName, 285, 295);
+        g.drawString(N.printName(N.root),160,70);
+      //  g.drawString(A.fName + " " + A.lName ,160,70);
+      //  g.drawString(B.fName + " " + B.lName,410,70);
+      //  g.drawString(C.fName + " " + C.lName, 285, 295);
     }
 
     //mouse methods

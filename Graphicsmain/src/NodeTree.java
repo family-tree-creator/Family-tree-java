@@ -150,22 +150,26 @@ public class NodeTree {
             }
         }
         
-        public Node findPerson(Node R, String first, String last){
+        public Node findPerson(Node R, Node C, String first, String last){
+          if(R == null) return null;
+          
           if(R.fName.equals(first) && R.lName.equals(last)){
             return R;
           }
-          Node temp = findPerson(R.father, first, last);
+          Node temp = findPerson(R.father, R, first, last);
           if(temp != null){
             return temp;
           }
-          temp = findPerson(R.mother, first, last);
+          temp = findPerson(R.mother, R, first, last);
           if(temp != null){
             return temp;
           }
           for(int i = 0; i < R.child.size(); i++){
-            temp = findPerson(R.child.get(i), first, last);
-            if(temp != null){
-              return temp;
+            if(R.child.get(i) != C){
+                temp = findPerson(R.child.get(i), R, first, last);
+                if(temp != null){
+                    return temp;
+                }
             }
           }
           return null;

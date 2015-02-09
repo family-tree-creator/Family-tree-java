@@ -115,13 +115,34 @@ public class NodeTree {
             c.father = f;
         }
         
-        public void addSpouse(Node c, Node s){
-            c.spouse.add(s);
+        public void addSpouse(Node C, String first, String last){
+            Node S = new Node(first,last);
+            
+            //check if spouse already spouse
+            for(int i = 0; i < C.spouse.size(); i++){
+                if (first == C.spouse.get(i).fName){
+                    return;
+                }    
+            }
+            
+            C.spouse.add(S);
+            familySize++;
         }
         
         public void addChild(Node P, String first, String last){
             Node C = new Node(first,last);
+            
+            //check if child already child of parent
+            for(int i = 0; i < P.child.size(); i++){
+                if (first == P.child.get(i).fName){
+                    return;
+                }    
+            }
+            
             P.child.add(C);
+            familySize++;
+            
+            //if parent has gender, associate as father or mother
             if (P.gender == 'm'){
                 addFather(C,P);
             }else if (P.gender == 'f'){
@@ -130,19 +151,19 @@ public class NodeTree {
         }
         
         public Node findPerson(Node R, String first, String last){
-          if(R.first.equals(first) && R.last.equals(last)){
+          if(R.fName.equals(first) && R.lName.equals(last)){
             return R;
           }
-          Node temp = findperson(R.father, first, last)
+          Node temp = findPerson(R.father, first, last);
           if(temp != null){
             return temp;
           }
-          temp = findperson(R.mother, first, last);
+          temp = findPerson(R.mother, first, last);
           if(temp != null){
             return temp;
           }
           for(int i = 0; i < R.child.size(); i++){
-            temp = findperson(R.child.get(i));
+            temp = findPerson(R.child.get(i), first, last);
             if(temp != null){
               return temp;
             }

@@ -39,6 +39,8 @@ public class Graphicsrun extends JPanel implements MouseListener{
         N.addChild(N.root,"Willow","Smith");
         System.out.println(N.familySize);
         
+      //  N.printName(N.findPerson(N.root,"Willow","Smith"));
+        
       //  Node A = new Node("Will","Smith",100,25);
       //  Node B = new Node("Jada","Pinkett",350,25);
       //  Node C = new Node("Willow","Smith",225,250);  

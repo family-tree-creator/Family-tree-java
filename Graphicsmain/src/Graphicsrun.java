@@ -17,10 +17,6 @@ import java.util.ArrayList;
  * @author daniposi
  */
 public class Graphicsrun extends JPanel implements MouseListener{
-
-//    public void addChild(Node p, Node c){
- //      p.child.add(c);
-  //  }
     
     public void createBox(Graphics g, int x, int y){
         g.setColor(Color.YELLOW);
@@ -34,13 +30,11 @@ public class Graphicsrun extends JPanel implements MouseListener{
         addMouseListener(this);
        
         NodeTree N = new NodeTree(); 
-        N.createRoot(N);
-        N.addFname(N.root,"Will");
-        N.addLname(N.root,"Smith");
+        N.addRoot("Will","Smith");
         N.addGender(N.root,'m');
-        
-        
-       // N.addChild(N.root, );
+        N.addChild(N.root,"Willow","Smith");
+        N.addGender(N.root.child.get(0),'f');
+        System.out.println(N.root.child.get(0).father.fName);
         
       //Node A = new Node("Will","Smith",100,25);
       //  Node B = new Node("Jada","Pinkett",350,25);
@@ -59,6 +53,7 @@ public class Graphicsrun extends JPanel implements MouseListener{
        
         g.setColor(Color.RED);
         g.drawString(N.printName(N.root),160,70);
+        g.drawString(N.printName(N.root.child.get(0)),285,295);
       //  g.drawString(A.fName + " " + A.lName ,160,70);
       //  g.drawString(B.fName + " " + B.lName,410,70);
       //  g.drawString(C.fName + " " + C.lName, 285, 295);

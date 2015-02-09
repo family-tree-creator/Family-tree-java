@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class NodeTree {
   
-    private class Node{
+    public class Node{
         String fName;
         String lName;
         int age;
@@ -69,19 +69,23 @@ public class NodeTree {
         }
     }
     
-        //field for NodeTree class
+        //fields for NodeTree class
         public Node root;
+        public int familySize;
         
         //constructor for NodeTree
         public NodeTree(){
             root = null;
+            familySize = 0;
         }
         
         //Operations
-        public void createRoot(NodeTree N){
-            Node R = new Node("","",-1);
-            N.root = R;
-        }     
+        public void addRoot(String first, String last){
+            Node N = new Node(first,last);
+            if(familySize == 0){
+                root = N; 
+            }
+        }
         
         public void addFname(Node p, String first){
             //check != null
@@ -99,7 +103,7 @@ public class NodeTree {
         }
         
         public void addGender(Node p, char g){
-            //check if g or m
+            //check if f or m
             p.gender = g;
         }
         
@@ -115,8 +119,14 @@ public class NodeTree {
             c.spouse.add(s);
         }
         
-        public void addChild(Node p, Node c){
-            p.child.add(c);
+        public void addChild(Node P, String first, String last){
+            Node C = new Node(first,last);
+            P.child.add(C);
+            if (P.gender == 'm'){
+                addFather(C,P);
+            }else if (P.gender == 'f'){
+                addMother(C,P);
+            }
         }
     
         public String printName(Node p){

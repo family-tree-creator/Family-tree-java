@@ -124,6 +124,10 @@ public class NodeTree {
         
         public void addGender(Node p, char g){
             //check if f or m
+            if(g != 'f' && g != 'm'){
+                throw new RuntimeException("NodeTree Error: addGender(Node p, char g)"
+                        + " must be given either 'f' or 'm'.");
+            }
             p.gender = g;
         }
         

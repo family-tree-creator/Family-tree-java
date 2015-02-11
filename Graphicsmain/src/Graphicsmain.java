@@ -19,7 +19,7 @@ public class Graphicsmain {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Graphicsrun gr = new Graphicsrun();
         f.add(gr);
-        f.setSize(800,700);
+        f.setSize(1200,900);
         f.setVisible(true);
     }
   

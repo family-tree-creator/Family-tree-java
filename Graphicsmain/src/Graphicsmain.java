@@ -21,9 +21,10 @@ public class Graphicsmain {
         f.add(gr);
         f.setSize(1200,900);
         f.setVisible(true);
+        testTree();
     }
   
-    public void Import(String s){
+    public static void Import(String s){
         FileReader in = null;
         try{
             in = new FileReader(s);
@@ -38,9 +39,23 @@ public class Graphicsmain {
         }
     }
     
-    public void testTree(){
+    public static void testTree(){
         NodeTree N = new NodeTree();
-        N.addNode("A", "Az");
+        //int[] birth = {1,2,3};
+        //int[] death = {4,5,6};
+        //N.addNode("A", "Az", 3, 'm', birth, death, "B", "Bz", "C", "Cz");
+        N.addNode("A", "Az", 'm', "B", "Bz", "C", "Cz");
+        N.addNode("B", "Bz", 'm', "D", "Dz", "E", "Ez");
+        N.addNode("C", "Cz", 'f', "F", "Fz", "G", "Gz");
         
+        System.out.println(N.printCurrName());
+        N.tMother();
+        System.out.println(N.printCurrName());
+        N.tFather();
+        System.out.println(N.printCurrName());
+        N.tChild("C", "Cz");
+        System.out.println(N.printCurrName());
+        N.tChild("A", "Az");
+        System.out.println(N.printCurrName());
     }
 }

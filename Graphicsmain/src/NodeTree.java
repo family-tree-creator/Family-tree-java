@@ -19,8 +19,8 @@ public class NodeTree {
         String lName;
         int age;
         char gender;
-        int birth; 
-        int death;
+        int[] birth; 
+        int[] death;
         Node mother;
         Node father;
         List<Node> spouse;
@@ -33,8 +33,8 @@ public class NodeTree {
             lName = "";
             age = 0;
             gender = ' ';
-            birth = 0;
-            death = 0; 
+            birth = new int[3];
+            death = new int[3]; 
             mother = null;
             father = null;
             spouse = new ArrayList();
@@ -47,8 +47,8 @@ public class NodeTree {
             lName = last;
             age = 0;
             gender = ' ';
-            birth = 0;
-            death = 0; 
+            birth = null;
+            death = null; 
             mother = null;
             father = null;
             spouse = new ArrayList();
@@ -61,8 +61,8 @@ public class NodeTree {
             lName = last;
             age = a;
             gender = ' ';
-            birth = 0;
-            death = 0; 
+            birth = null;
+            death = null; 
             mother = null;
             father = null;
             spouse = new ArrayList();
@@ -74,8 +74,21 @@ public class NodeTree {
             lName = last;
             age = 0;
             gender = g;
-            birth = 0;
-            death = 0; 
+            birth = null;
+            death = null; 
+            mother = null;
+            father = null;
+            spouse = new ArrayList();
+            child = new ArrayList();
+        }
+        
+        Node(String first, String last, int a, char g, int[] b, int[] d){
+            fName = first;
+            lName = last;
+            age = a;
+            gender = g;
+            birth = b;
+            death = d; 
             mother = null;
             father = null;
             spouse = new ArrayList();
@@ -103,13 +116,9 @@ public class NodeTree {
             }
         }
         
-        public void addNode(String first, String last, String ffirst, String flast, String mfirst, String mlast, char gender){
+        public void addNode(String first, String last, char gender, String ffirst, String flast, String mfirst, String mlast){
             Node N = new Node(first,last,gender);
             addtNode(N, false);
-            //Node F = new Node(ffirst, flast);
-            //Node M = new Node(mfirst, flast);
-            //addMother(N,M);
-            //addFather(N,F);
             Node temp;
             if(familySize == 0){
                 root = N; 
@@ -129,24 +138,40 @@ public class NodeTree {
                 }
             }
             
-            temp = findPerson(root,null, ffirst, flast);
-            if(temp == null){
-                temp = new Node(ffirst, flast,'m');
-                addtNode(temp, true);
-                //System.out.println(printName(temp));
-            }//else transefer its mother father ...
-            addFather(N,temp);
-            addChild(temp,N);
-            temp = findPerson(root,null,mfirst,mlast);
-            if(temp == null){
-                temp = new Node(mfirst,mlast,'f');
-                addtNode(temp, true);
-                //System.out.println(printName(temp));
-            }//else transfer its mother father ...
-            addMother(N,temp);
-            addChild(temp,N);
+            addFather(N, ffirst, flast);
+            addMother(N, mfirst, mlast);
             familySize++;
         }
+        
+        /*public void addNode(String first, String last, int age, char gender,  int[] birth, int[] death, String ffirst, String flast, String mfirst, String mlast){
+            Node N = new Node(first,last,age, gender, birth, death);
+            addtNode(N, false);
+            Node temp;
+            if(familySize == 0){
+                root = N; 
+                curr = N;
+            }
+            else{
+                temp = findPerson(root,null,first,last);
+                if(temp != null){
+                    Node temp2;
+                    for(int i = 0; i < temp.child.size(); i++){
+                        temp2 = temp.child.get(i);
+                        addChild(N,temp2);
+                        if(N.gender == 'm') addFather(temp2, N);
+                        else if (N.gender == 'f') addMother(temp2,N);
+                    }
+                //add rest of transfers
+                }
+            }
+            addFather(N, ffirst, flast);
+            addMother(N, mfirst, mlast);
+            familySize++;
+        }*/
+        
+        //public Node makeNode(String first, String last, char gender, String ffirst, String flast, String mfirst, String mlast){
+            
+        //}
         
         public void addFname(Node p, String first){
             //check != null
@@ -176,8 +201,30 @@ public class NodeTree {
             c.mother = m;
         }
         
+        public void addMother(Node c, String mfirst, String mlast){
+            Node temp = findPerson(root,null,mfirst,mlast);
+            if(temp == null){
+                temp = new Node(mfirst,mlast,'f');
+                addtNode(temp, true);
+                //System.out.println(printName(temp));
+            }//else transfer its mother father ...
+            addMother(c,temp);
+            addChild(temp,c);
+        }
+        
         public void addFather(Node c, Node f){
             c.father = f;
+        }
+        
+        public void addFather(Node c, String ffirst, String flast){
+            Node temp = findPerson(root,null, ffirst, flast);
+            if(temp == null){
+                temp = new Node(ffirst, flast,'m');
+                addtNode(temp, true);
+                //System.out.println(printName(temp));
+            }//else transefer its mother father ...
+            addFather(c,temp);
+            addChild(temp,c);
         }
         
         public void addSpouse(Node C, String first, String last){
@@ -267,11 +314,33 @@ public class NodeTree {
         public void tFather(){
             curr = curr.father;
         }
+        
+        public void tChild(String fname, String lname){
+            Node temp;
+            for(int i = 0; i < curr.child.size(); i++){
+                temp = curr.child.get(i);
+                if(temp.fName.equals(fname) && temp.lName.equals(lname)){
+                    curr = temp;
+                    return;
+                }
+            }
+            //print an error message.
+            System.out.println("nope");
+        }
     
         public String printName(Node p){
           String s = p.fName + ", " + p.lName;
           return s;
         }
+        
+        public String printCurrName(){
+            return curr.fName + ", " + curr.lName;
+        }
+        
+        //public String printCurrBD(){
+        //    String 
+        //    return curr.birth[0]
+        //}
         
         public void printTNode(Node N){
             System.out.println(N.tNode);

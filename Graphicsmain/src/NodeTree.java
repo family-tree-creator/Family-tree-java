@@ -113,6 +113,7 @@ public class NodeTree {
             Node N = new Node(first,last);
             if(familySize == 0){
                 root = N; 
+                curr = N;
             }
         }
         

@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 //package graphicsrun;
-//does this work????
-//WORK?????
-//work
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -36,22 +33,22 @@ public class Graphicsrun extends JPanel implements MouseListener{
     
     //draw root box in center
     createBox(g,width/2 - 87 ,height/2 - 40); 
-    createText(g,N.printName(N.root),width/2 - 40,height/2); //need to center text
+    createText(g,N.printName(N.curr),width/2 - 40,height/2); //need to center text
     
-    if(N.root.father!=null || N.root.mother != null){
+    if(N.curr.father!=null || N.curr.mother != null){
         createLine(g,width/2, height/2-200, width/2, height/2-40);
     }
     
     //draws boxes for parents
-    if(N.root.father != null){
+    if(N.curr.father != null){
         createBox(g,width/2 - 210,height/2 - 240);
         createLine(g,width/2 - 35, height/2-200, width/2, height/2-200);
-        createText(g,N.printName(N.root.father),width/2 - 210, height/2-240);
+        createText(g,N.printName(N.curr.father),width/2 - 210, height/2-240);
      }
-    if(N.root.mother != null){
+    if(N.curr.mother != null){
         createBox(g,width/2 + 35,height/2 - 240); 
         createLine(g,width/2, height/2-200, width/2 + 35, height/2-200);
-        createText(g,N.printName(N.root.mother),width/2 + 35, height/2 - 240);
+        createText(g,N.printName(N.curr.mother),width/2 + 35, height/2 - 240);
    }
          
     //determines root's number of children, then adjusts spacing for boxes
@@ -59,18 +56,18 @@ public class Graphicsrun extends JPanel implements MouseListener{
     int spacing = 0;
     int endline = 0;
         
-    if(N.root.child.size() == 1){
+    if(N.curr.child.size() == 1){
         spacing = width/2 - 87;
-    }else if(N.root.child.size() == 2){
+    }else if(N.curr.child.size() == 2){
         spacing = width/2 - 205;
         endline = spacing + 240 + 87; 
-    }else if(N.root.child.size() == 3){
+    }else if(N.curr.child.size() == 3){
         spacing = width/2 - 333;
         endline = spacing + (240*2) + 87;
-    }else if(N.root.child.size() == 4){
+    }else if(N.curr.child.size() == 4){
         spacing = width/2 - 444;
         endline = spacing + (240*3) + 87;
-    }else if(N.root.child.size() == 5){
+    }else if(N.curr.child.size() == 5){
         spacing = width/2 - 570;
         endline = spacing + (240*4) + 87;
     }
@@ -78,15 +75,15 @@ public class Graphicsrun extends JPanel implements MouseListener{
     //vertical line connecting children
     createLine(g,width/2,height/2+40,width/2,height/2+100);
     //horizontal line connecting children
-    if(N.root.child.size()>1){
+    if(N.curr.child.size()>1){
         createLine(g,spacing + 87,height/2+100,endline,height/2+100);
     }
 
     //Creates boxes for every child
-    for(int i = 0; i < N.root.child.size(); i++){
+    for(int i = 0; i < N.curr.child.size(); i++){
         int k = spacing + i * 240;
         createBox(g,k, height/2 + 160 );
-        createText(g,N.printName(N.root.child.get(i)),k + 40 , height/2 + 200);
+        createText(g,N.printName(N.curr.child.get(i)),k + 40 , height/2 + 200);
         createLine(g,k + 87, height/2 + 160, k + 87, height/2 + 100);
     }
     }
@@ -109,31 +106,44 @@ public class Graphicsrun extends JPanel implements MouseListener{
     public void paintComponent(Graphics g){
         this.setBackground(Color.WHITE);
         super.paintComponent(g);
-        
-        addMouseListener(this);
        
-        NodeTree N = new NodeTree(); 
-        N.addNode("Will","Smith");
-        N.addGender(N.root,'m');
-        N.addChild(N.root,"Willow","Smith");
-        N.addChild(N.root, "Jade", "Smith");
-        N.addChild(N.root, "Blank", "Smith");
-       // N.addChild(N.root, "hello", "Smith");
-       // N.addChild(N.root, "Tree", "Smith");
-        N.addSpouse(N.root,"Jada","Pinkett");
-       
-        N.addGender(N.root.child.get(0),'f');
-        N.addGender(N.root.child.get(0),'m');
+        final NodeTree N = new NodeTree(); 
         
-        N.addChild(N.root,"Willow","Smith");
+        N.addNode("Will","Smith",'m',"Bob","Smith","Wilma","Smith");
+        N.addGender(N.curr,'m');
+        N.addChild(N.curr,"Willow","Smith");
+        N.addChild(N.curr, "Jade", "Smith");
+        N.addChild(N.curr, "Blank", "Smith");
+       // N.addChild(N.curr, "hello", "Smith");
+       // N.addChild(N.curr, "Tree", "Smith");
+        N.addSpouse(N.curr,"Jada","Pinkett");
+       
+        N.addGender(N.curr.child.get(0),'f');
+        N.addGender(N.curr.child.get(0),'m');
+        
+   
      
-      // System.out.println(N.printName(N.root));
+        System.out.println(N.printName(N.curr));
       // System.out.println(N.printName(N.findPerson(N.root,N.root.child.get(0),"Willow","Smith")));
 
         drawTree(g,N);
-    }
+        
+        addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent me){
+                System.out.println("click");
+                N.tChild("Willow","Smith");
+            }
+        });
+        
+       
+        
+        }
 
-    //mouse methods
+        
+        
+
+
+    //mouse methods that don't do anything, but are needed to override abstract methods
     public void mouseClicked (MouseEvent me) {
         int xpos = me.getX();
         int ypos = me.getY();

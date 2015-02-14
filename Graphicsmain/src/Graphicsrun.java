@@ -31,30 +31,63 @@ public class Graphicsrun extends JPanel implements MouseListener{
     int width = getWidth() - 1; 
     int height = getHeight() - 2; 
     //temporary lines for centering
-    g.drawLine(width / 2, 0, width / 2, height);
-    g.drawLine(0, height / 2, width, height / 2);
-    
+    //g.drawLine(width / 2, 0, width / 2, height);
+    //g.drawLine(0, height / 2, width, height / 2);
     
     //draw root box in center
-    createBox(g,width/2 - 87 ,height/2 - 40);    
+    createBox(g,width/2 - 87 ,height/2 - 40); 
+    createText(g,N.printName(N.root),width/2 - 40,height/2); //need to center text
     
-    //determines root's number of children, then adjusts variable to fit on panel
+    if(N.root.father!=null || N.root.mother != null){
+        createLine(g,width/2, height/2-200, width/2, height/2-40);
+    }
+    
+    //draws boxes for parents
+    if(N.root.father != null){
+        createBox(g,width/2 - 210,height/2 - 240);
+        createLine(g,width/2 - 35, height/2-200, width/2, height/2-200);
+        createText(g,N.printName(N.root.father),width/2 - 210, height/2-240);
+     }
+    if(N.root.mother != null){
+        createBox(g,width/2 + 35,height/2 - 240); 
+        createLine(g,width/2, height/2-200, width/2 + 35, height/2-200);
+        createText(g,N.printName(N.root.mother),width/2 + 35, height/2 - 240);
+   }
+         
+    //determines root's number of children, then adjusts spacing for boxes
+    //and draws connecting lines
     int spacing = 0;
+    int endline = 0;
+        
     if(N.root.child.size() == 1){
         spacing = width/2 - 87;
     }else if(N.root.child.size() == 2){
-        spacing = width/2 - 210;
+        spacing = width/2 - 205;
+        endline = spacing + 240 + 87; 
     }else if(N.root.child.size() == 3){
         spacing = width/2 - 333;
+        endline = spacing + (240*2) + 87;
     }else if(N.root.child.size() == 4){
         spacing = width/2 - 444;
+        endline = spacing + (240*3) + 87;
     }else if(N.root.child.size() == 5){
-        spacing = width/2 - 555;
+        spacing = width/2 - 570;
+        endline = spacing + (240*4) + 87;
     }
     
+    //vertical line connecting children
+    createLine(g,width/2,height/2+40,width/2,height/2+100);
+    //horizontal line connecting children
+    if(N.root.child.size()>1){
+        createLine(g,spacing + 87,height/2+100,endline,height/2+100);
+    }
+
     //Creates boxes for every child
     for(int i = 0; i < N.root.child.size(); i++){
-        createBox(g,spacing + i * 240, height/2 + 160 );
+        int k = spacing + i * 240;
+        createBox(g,k, height/2 + 160 );
+        createText(g,N.printName(N.root.child.get(i)),k + 40 , height/2 + 200);
+        createLine(g,k + 87, height/2 + 160, k + 87, height/2 + 100);
     }
     }
     
@@ -62,7 +95,17 @@ public class Graphicsrun extends JPanel implements MouseListener{
         g.setColor(Color.YELLOW);
         g.fillRect(x,y,175,80);
     }
+    
+    public void createLine(Graphics g, int x, int y, int x2, int y2){
+        g.setColor(Color.BLACK);
+        g.drawLine(x,y,x2,y2);
+    }
 
+    public void createText(Graphics g, String s, int x, int y){
+        g.setColor(Color.RED);
+        g.drawString(s,x,y);
+    }
+    
     public void paintComponent(Graphics g){
         this.setBackground(Color.WHITE);
         super.paintComponent(g);
@@ -74,36 +117,20 @@ public class Graphicsrun extends JPanel implements MouseListener{
         N.addGender(N.root,'m');
         N.addChild(N.root,"Willow","Smith");
         N.addChild(N.root, "Jade", "Smith");
-       //N.addChild(N.root, "Blank", "Smith");
-       //N.addChild(N.root, "hello", "Smith");
-       //N.addChild(N.root, "Tree", "Smith");
+        N.addChild(N.root, "Blank", "Smith");
+       // N.addChild(N.root, "hello", "Smith");
+       // N.addChild(N.root, "Tree", "Smith");
         N.addSpouse(N.root,"Jada","Pinkett");
        
         N.addGender(N.root.child.get(0),'f');
         N.addGender(N.root.child.get(0),'m');
         
         N.addChild(N.root,"Willow","Smith");
-        System.out.println(N.printName(N.root));
-        
-      //  System.out.println(N.printName(N.findPerson(N.root,N.root.child.get(0),"Willow","Smith")));
+     
+      // System.out.println(N.printName(N.root));
+      // System.out.println(N.printName(N.findPerson(N.root,N.root.child.get(0),"Willow","Smith")));
 
-
-        
         drawTree(g,N);
-        
-        
-        
-        //createBox(g,350,25);
-        //createBox(g,225,250);
-  
-       //g.setColor(Color.BLACK);
-       // g.drawLine(275,65,350,65);
-       // g.drawLine(312,65,312,250);
-       
-       // g.setColor(Color.RED);
-       // g.drawString(N.printName(N.root),160,70);
-       // g.drawString(N.printName(N.root.spouse.get(0)),410,70);
-       // g.drawString(N.printName(N.root.child.get(0)),285,295);
     }
 
     //mouse methods

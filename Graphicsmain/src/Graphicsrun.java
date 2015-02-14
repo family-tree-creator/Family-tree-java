@@ -27,9 +27,6 @@ public class Graphicsrun extends JPanel implements MouseListener{
     //width and height of panel    
     int width = getWidth() - 1; 
     int height = getHeight() - 2; 
-    //temporary lines for centering
-    //g.drawLine(width / 2, 0, width / 2, height);
-    //g.drawLine(0, height / 2, width, height / 2);
     
     //draw root box in center
     createBox(g,width/2 - 87 ,height/2 - 40); 
@@ -42,8 +39,8 @@ public class Graphicsrun extends JPanel implements MouseListener{
     //draws boxes for parents
     if(N.curr.father != null){
         createBox(g,width/2 - 210,height/2 - 240);
-        createLine(g,width/2 - 35, height/2-200, width/2, height/2-200);
-        createText(g,N.printName(N.curr.father),width/2 - 210, height/2-240);
+        createText(g,N.printName(N.curr.father),width/2 - 163, height/2-240);
+        createLine(g,width/2 - 35, height/2-200, width/2, height/2-200);        
      }
     if(N.curr.mother != null){
         createBox(g,width/2 + 35,height/2 - 240); 
@@ -73,10 +70,12 @@ public class Graphicsrun extends JPanel implements MouseListener{
     }
     
     //vertical line connecting children
-    createLine(g,width/2,height/2+40,width/2,height/2+100);
-    //horizontal line connecting children
-    if(N.curr.child.size()>1){
-        createLine(g,spacing + 87,height/2+100,endline,height/2+100);
+    if(N.curr.child.size()!=0){
+        createLine(g,width/2,height/2+40,width/2,height/2+100);
+        //horizontal line connecting children
+         if(N.curr.child.size()>1){
+            createLine(g,spacing + 87,height/2+100,endline,height/2+100);
+        }
     }
 
     //Creates boxes for every child
@@ -103,7 +102,7 @@ public class Graphicsrun extends JPanel implements MouseListener{
         g.drawString(s,x,y);
     }
     
-    public void paintComponent(Graphics g){
+    public void paintComponent(final Graphics g){
         this.setBackground(Color.WHITE);
         super.paintComponent(g);
        
@@ -122,21 +121,21 @@ public class Graphicsrun extends JPanel implements MouseListener{
         N.addGender(N.curr.child.get(0),'m');
         
    
-     
-        System.out.println(N.printName(N.curr));
-      // System.out.println(N.printName(N.findPerson(N.root,N.root.child.get(0),"Willow","Smith")));
-
-        drawTree(g,N);
         
+        System.out.println("The current node is " + N.printName(N.curr));
+        N.tChild("Willow","Smith");
+
         addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent me){
                 System.out.println("click");
                 N.tChild("Willow","Smith");
-            }
+                g.setColor(Color.WHITE);
+                g.fillRect(0,0,getWidth(),getHeight());
+                repaint(); 
+            } 
         });
         
-       
-        
+        drawTree(g,N);        
         }
 
         

@@ -41,14 +41,14 @@ public class Graphicsmain {
     
     public static void testTree(){
         NodeTree N = new NodeTree();
-        //int[] birth = {1,2,3};
-        //int[] death = {4,5,6};
-        //N.addNode("A", "Az", 3, 'm', birth, death, "B", "Bz", "C", "Cz");
-        N.addNode("A", "Az", 'm', "B", "Bz", "C", "Cz");
+        int[] birth = {1,2,3};
+        int[] death = {4,5,6};
+        N.addNode("A", "Az", 3, 'm', birth, death, "B", "Bz", "C", "Cz");
+        //N.addNode("A", "Az", 'm', "B", "Bz", "C", "Cz");
         N.addNode("B", "Bz", 'm', "D", "Dz", "E", "Ez");
         N.addNode("C", "Cz", 'f', "F", "Fz", "G", "Gz");
         
-        System.out.println(N.printCurrName());
+        System.out.println(N.printCurrNode());
         N.tMother();
         System.out.println(N.printCurrName());
         N.tFather();

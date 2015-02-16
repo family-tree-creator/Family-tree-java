@@ -15,12 +15,12 @@ import javax.swing.*;
 
 public class Graphicsmain {
     public static void main(String[] args){
-        JFrame f = new JFrame("Family Tree");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Graphicsrun gr = new Graphicsrun();
-        f.add(gr);
-        f.setSize(1200,900);
-        f.setVisible(true);
+        //JFrame f = new JFrame("Family Tree");
+        //f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //Graphicsrun gr = new Graphicsrun();
+        //f.add(gr);
+        //f.setSize(1200,900);
+        //f.setVisible(true);
         testTree();
     }
   
@@ -43,6 +43,10 @@ public class Graphicsmain {
         NodeTree N = new NodeTree();
         int[] birth = {1,2,3};
         int[] death = {4,5,6};
+        TupleList t = new TupleList();
+        t.add("H", "Hz");
+        t.add("I", "Iz");
+        t.add("J", "Jz");
         N.addNode("A", "Az", 3, 'm', birth, death, "B", "Bz", "C", "Cz");
         //N.addNode("A", "Az", 'm', "B", "Bz", "C", "Cz");
         N.addNode("B", "Bz", 'm', "D", "Dz", "E", "Ez");

@@ -12,3 +12,5 @@ parent (at most 2)
 (may all have blanks)
 
 First; Last; gener; birth; city born; death; city death; father; mother; spouses(first [children(first, second,...], second(children[]))
+
+http://www.realapplets.com/tutorial/mouseclickexample.html

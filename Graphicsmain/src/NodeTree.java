@@ -184,7 +184,7 @@ public class NodeTree {
             familySize++;
         }
         
-        public void addNode(String first, String last, int age, char gender,  int[] birth, int[] death, String ffirst, String flast, String mfirst, String mlast, TupleList t){
+        public void addNode(String first, String last, int age, char gender,  int[] birth, int[] death, String ffirst, String flast, String mfirst, String mlast, TupleList child){
             Node N = new Node(first,last,age, gender, birth, death);
             addtNode(N, false);
             Node temp;
@@ -405,6 +405,14 @@ public class NodeTree {
                 }
             }
             //print an error message.
+            System.out.println("nope");
+        }
+        
+        public void tChild(int index){
+            if(index < curr.child.size()){
+                curr = curr.child.get(index);
+                return;
+            }
             System.out.println("nope");
         }
     

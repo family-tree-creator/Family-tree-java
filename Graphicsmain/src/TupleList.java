@@ -50,4 +50,8 @@ public class TupleList {
         tList.add(new Tuple(f,s));
     }
     
+    public void remove(int index){
+        tList.remove(index);
+    }
+    
 }

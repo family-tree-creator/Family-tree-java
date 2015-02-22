@@ -15,13 +15,13 @@ import javax.swing.*;
 
 public class Graphicsmain {
     public static void main(String[] args){
-        JFrame f = new JFrame("Family Tree");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Graphicsrun gr = new Graphicsrun();
-        f.add(gr);
-        f.setSize(1200,900);
-        f.setVisible(true);
-        //testTree();
+        //JFrame f = new JFrame("Family Tree");
+        //f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //Graphicsrun gr = new Graphicsrun();
+        //f.add(gr);
+        //f.setSize(1200,900);
+        //f.setVisible(true);
+        testTree();
     }
   
     public static void Import(String s){
@@ -47,19 +47,44 @@ public class Graphicsmain {
         t.add("H", "Hz");
         t.add("I", "Iz");
         t.add("J", "Jz");
-        N.addNode("A", "Az", 3, 'm', birth, death, "B", "Bz", "C", "Cz");
+        TupleList t2 = new TupleList();
+        t2.add("A", "Az");
+        t2.add("L", "Lz");
+        N.addNode("A", "Az",'m', birth, death, "B", "Bz", "C", "Cz", t);
         //N.addNode("A", "Az", 'm', "B", "Bz", "C", "Cz");
-        N.addNode("B", "Bz", 'm', "D", "Dz", "E", "Ez");
+        N.addNode("B", "Bz", 'm', birth, death, "D", "Dz", "E", "Ez", t2);
+        //N.addNode("B", "Bz", 'm', "D", "Dz", "E", "Ez");
         N.addNode("C", "Cz", 'f', "F", "Fz", "G", "Gz");
+        N.addNode("H", "Hz", 'f', "A", "Az", "K", "Kz");
         
-        System.out.println(N.printCurrNode());
+        System.out.println(N.printCurrNode());// + " " + Integer.toString(N.currNumC()));
         N.tMother();
-        System.out.println(N.printCurrName());
+        System.out.println(N.printCurrName());// + " " + Integer.toString(N.currNumC()));
         N.tFather();
-        System.out.println(N.printCurrName());
+        System.out.println(N.printCurrName());// + " " + Integer.toString(N.currNumC()));
         N.tChild("C", "Cz");
-        System.out.println(N.printCurrName());
+        System.out.println(N.printCurrName());// + " " + Integer.toString(N.currNumC()));
         N.tChild("A", "Az");
-        System.out.println(N.printCurrName());
+        System.out.println(N.printCurrName());// + " " + Integer.toString(N.currNumC()));
+        N.tChild(0);
+        System.out.println(N.printCurrName());// + " " + Integer.toString(N.currNumC()));
+        N.tMother();
+        System.out.println(N.printCurrName());// + " " + Integer.toString(N.currNumC()));
+        N.tChild(0);
+        System.out.println(N.printCurrName());// + " " + Integer.toString(N.currNumC()));
+        N.tFather();
+        System.out.println(N.printCurrName());// + " " + Integer.toString(N.currNumC()));
+        N.tFather();
+        System.out.println(N.printCurrName());// + " " + Integer.toString(N.currNumC()));
+        N.tChild("A", "Az");
+        System.out.println(N.printCurrName());// + " " + Integer.toString(N.currNumC()));
+        N.tChild(0);
+        System.out.println(N.printCurrName());// + " " + Integer.toString(N.currNumC()));
+        N.tFather();
+        System.out.println(N.printCurrName());// + " " + Integer.toString(N.currNumC()));
+        N.tFather();
+        System.out.println(N.printCurrName());// + " " + Integer.toString(N.currNumC()));
+        N.tChild(1);
+        System.out.println(N.printCurrName());// + " " + Integer.toString(N.currNumC()));
     }
 }

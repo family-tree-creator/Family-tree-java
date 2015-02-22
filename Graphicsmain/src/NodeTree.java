@@ -82,7 +82,7 @@ public class NodeTree {
             child = new ArrayList();
         }
         
-        Node(String first, String last, int a, char g, int[] b, int[] d){
+        Node(String first, String last, char g, int[] b, int[] d){
             fName = first;
             lName = last;
             age = calculateAge(b,d);
@@ -155,8 +155,8 @@ public class NodeTree {
         }
         
         //creates a full node and a tree (spouses to be added)
-        public void addNode(String first, String last, int age, char gender,  int[] birth, int[] death, String ffirst, String flast, String mfirst, String mlast){
-            Node N = new Node(first,last,age, gender, birth, death);
+        public void addNode(String first, String last, char gender,  int[] birth, int[] death, String ffirst, String flast, String mfirst, String mlast){
+            Node N = new Node(first,last, gender, birth, death);
             addtNode(N, false);
             Node temp;
             if(familySize == 0){
@@ -184,8 +184,8 @@ public class NodeTree {
             familySize++;
         }
         
-        public void addNode(String first, String last, int age, char gender,  int[] birth, int[] death, String ffirst, String flast, String mfirst, String mlast, TupleList child){
-            Node N = new Node(first,last,age, gender, birth, death);
+        public void addNode(String first, String last, char gender,  int[] birth, int[] death, String ffirst, String flast, String mfirst, String mlast, TupleList childs){
+            Node N = new Node(first,last, gender, birth, death);
             addtNode(N, false);
             Node temp;
             if(familySize == 0){
@@ -202,13 +202,18 @@ public class NodeTree {
                         if(N.gender == 'm') addFather(temp2, N);
                         else if (N.gender == 'f') addMother(temp2,N);
                     }
-                    addFather(N, temp.father);
-                    addMother(N, temp.mother);
+                    if(temp.father != null)
+                        addFather(N, temp.father);
+                    if(temp.mother != null)
+                        addMother(N, temp.mother);
                     //addSpouse
                 }
             }
             addFather(N, ffirst, flast);
             addMother(N, mfirst, mlast);
+            //System.out.println("child stuff");
+            addChild(N, childs);
+            //System.out.println("child stuff end");
             //addSpouse
             
             
@@ -345,6 +350,23 @@ public class NodeTree {
             //else if(P.gender == 'f') addMother(C,P);
         }
         
+        public void addChild(Node P, TupleList check){
+            Node temp;
+            for(int i = 0; i < P.child.size(); i++){
+                temp = P.child.get(i);
+                System.out.println(Integer.toString(check.size()));
+                for(int j = 0; i < check.size(); j++){
+                    if(temp.fName.equals(check.getFirst(j)) && temp.lName.equals(check.getSecond(j))){
+                        check.remove(j);
+                        break;
+                    }
+                }
+            }
+            for(int k = 0; k < check.size(); k++){
+                P.child.add(new Node(check.getFirst(k), check.getSecond(k)));
+            }
+        }
+        
         //adds the tag of temp node
         public void addtNode(Node N, boolean temp){
             N.tNode = temp;
@@ -445,6 +467,7 @@ public class NodeTree {
             }
             return bd;
         }
+        
         public String printCurrDeath(){
             String bd = "";
             for(int i = 0; i < 3; i++){
@@ -473,6 +496,10 @@ public class NodeTree {
         //returns number of childrend a node has
         public int numOfChild(Node N){
             return N.child.size();
+        }
+        
+        public int currNumC(){
+            return curr.child.size();
         }
         
         /*public List<Node> createChildren(){

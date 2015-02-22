@@ -145,6 +145,10 @@ public class NodeTree {
                         if(N.gender == 'm') addFather(temp2, N);
                         else if (N.gender == 'f') addMother(temp2,N);
                     }
+                    if(temp.father != null)
+                        addFather(N, temp.father);
+                    if(temp.mother != null)
+                        addMother(N, temp.mother);
                 //add rest of transfers
                 }
             }
@@ -173,8 +177,10 @@ public class NodeTree {
                         if(N.gender == 'm') addFather(temp2, N);
                         else if (N.gender == 'f') addMother(temp2,N);
                     }
-                    addFather(N, temp.father);
-                    addMother(N, temp.mother);
+                    if(temp.father != null)
+                        addFather(N, temp.father);
+                    if(temp.mother != null)
+                        addMother(N, temp.mother);
                     //addSpouse
                 }
             }

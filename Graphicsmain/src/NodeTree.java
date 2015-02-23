@@ -462,13 +462,16 @@ public class NodeTree {
         //returns a string with curr's birth and death date
         public String printCurrBirth(){
             String bd = "";
-            for(int i = 0; i < 3; i++){
-                //if(i == 0){
-                //    bd += "birth: ";
-                //}
-                bd += Integer.toString(curr.birth[i]);
-                if(i < 2){
-                    bd+= "/";
+            
+            if(curr.birth != null){
+                for(int i = 0; i < 3; i++){
+                    //if(i == 0){
+                    //    bd += "birth: ";
+                    //}
+                    bd += Integer.toString(curr.birth[i]);
+                    if(i < 2){
+                        bd+= "/";
+                    }
                 }
             }
             return bd;
@@ -476,13 +479,16 @@ public class NodeTree {
         
         public String printCurrDeath(){
             String bd = "";
-            for(int i = 0; i < 3; i++){
-                //if(i == 0){
-                //    bd += "death: ";
-                //}
-                bd += Integer.toString(curr.death[i]);
-                if(i < 2){
-                    bd+= "/";
+            
+            if(curr.death!= null){
+                for(int i = 0; i < 3; i++){
+                    //if(i == 0){
+                    //    bd += "death: ";
+                    //}
+                    bd += Integer.toString(curr.death[i]);
+                    if(i < 2){
+                        bd+= "/";
+                    }
                 }
             }
             return bd;

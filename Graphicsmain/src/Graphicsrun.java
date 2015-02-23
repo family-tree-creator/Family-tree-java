@@ -14,7 +14,6 @@ import java.util.ArrayList;
  * @author daniposi
  */
 public class Graphicsrun extends JPanel implements MouseListener{
-    
     //fields for Graphicsrun
     NodeTree N;
     
@@ -28,7 +27,6 @@ public class Graphicsrun extends JPanel implements MouseListener{
     
     //booleans for boxes clicked
     boolean B = true; 
-    //boolean I = true; //initializing tree
     boolean fClick = false;
     boolean mClick = false;
     boolean cClick = false;
@@ -126,6 +124,28 @@ public class Graphicsrun extends JPanel implements MouseListener{
     }
     }
     
+    
+    //draws current individual 
+    public void drawIndTree(Graphics g){
+        //width and height of panel    
+        int width = getWidth(); 
+        int height = getHeight();   
+    
+        cx = width/2 - 87;
+        cy = height/2 - 40;
+        
+        //draw root box in center
+        createBox(g,cx,cy); 
+        createText(g,N.printCurrName(),width/2 - 40,height/2); 
+        
+        //prints info related to Node
+        createText(g,"Birth: " + N.printCurrBirth(),cx,cy + 100); 
+        createText(g,"Death: " + N.printCurrDeath(),cx,cy + 120);
+        createText(g,"Age: " + N.printCurrAge(),cx,cy + 140);
+        createText(g,"Gender: " + N.curr.gender,cx, cy + 160);
+    }
+    
+    
     //drawing tools
     public void createBox(Graphics g, int x, int y){
         g.setColor(Color.YELLOW);
@@ -144,20 +164,6 @@ public class Graphicsrun extends JPanel implements MouseListener{
     public void paintComponent(Graphics g){
         this.setBackground(Color.WHITE);
         super.paintComponent(g);
-       
-        //initializing tree only once 
-       /* if(I){
-        N.addNode("Will","Smith",'m',"Willard","Smith","Caroline","Bright");
-        N.addNode("Willard","Smith",'m',"Bob","Smith","Amy","Something");
-        N.addChild(N.curr,"Willow","Smith");
-        N.addChild(N.curr, "Jaden", "Smith");
-        N.addChild(N.curr, "Blank", "Smith");
-        N.addChild(N.curr, "hello", "Smith");
-        N.addChild(N.curr, "Tree", "Smith");
-       //N.addSpouse(N.curr,"Jada","Pinkett");
-        N.addGender(N.curr.child.get(0),'f');
-        I=false;
-        }*/
         
         if(B){
         addMouseListener(this); 
@@ -170,7 +176,7 @@ public class Graphicsrun extends JPanel implements MouseListener{
             kClick[i]=false;
             }
         }
-        
+         
         if(fClick){
             N.tFather();
             fClick = false;
@@ -178,11 +184,17 @@ public class Graphicsrun extends JPanel implements MouseListener{
             N.tMother();
             mClick = false;
         }
-        
-        //redraws updated tree
+       
+       
+       //redraws updated tree
         g.setColor(Color.WHITE); 
-        this.repaint(0,0,getWidth(),getHeight());            
-        drawTree(g); 
+        this.repaint(0,0,getWidth(),getHeight());    
+        
+        if(cClick){
+            drawIndTree(g);
+        }else{
+        drawTree(g);
+        }
     }
 
     //mouse methods 
@@ -190,7 +202,6 @@ public class Graphicsrun extends JPanel implements MouseListener{
         int xpos = me.getX();
         int ypos = me.getY();
         B = !B; 
-
        
         if(xpos > fx && xpos < fx+175 && ypos > fy && ypos < fy+80){
             fClick = true;
@@ -198,6 +209,12 @@ public class Graphicsrun extends JPanel implements MouseListener{
         
         if(xpos > mx && xpos < mx+175 && ypos > my && ypos < my+80){
             mClick = true;
+        }
+        
+        
+        if(xpos > cx && xpos < cx+175 && ypos > cy && ypos < cy+80){    
+            System.out.println("click");
+            cClick = !cClick;        
         }
 
         for(int i = 0; i < kClick.length; i++){

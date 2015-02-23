@@ -17,8 +17,20 @@ public class Graphicsmain {
     public static void main(String[] args){
         JFrame f = new JFrame("Family Tree");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        NodeTree N = new NodeTree();
-        N.addNode("Will","Smith",'m',"Willard","Smith","Caroline","Bright");
+        
+        /* all temporary - can be deleted */
+        NodeTree N = new NodeTree();  
+        int[]birth = new int[3];
+        birth[0]=1;
+        birth[1]=2;
+        birth[2]=1990;
+        int[]death = new int[3];
+        death[0]=2;
+        death[1]=1;
+        death[2]=1992;
+        N.addNode("Will","Smith",'m',birth,death,"Willard","Smith","Caroline","Bright"); //temp
+        /* end of temp to delete  */
+        
         Graphicsrun gr = new Graphicsrun(N);
         f.add(gr);
         f.setSize(1200,900);

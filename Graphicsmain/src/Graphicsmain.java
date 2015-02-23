@@ -17,7 +17,9 @@ public class Graphicsmain {
     public static void main(String[] args){
         JFrame f = new JFrame("Family Tree");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Graphicsrun gr = new Graphicsrun();
+        NodeTree N = new NodeTree();
+        N.addNode("Will","Smith",'m',"Willard","Smith","Caroline","Bright");
+        Graphicsrun gr = new Graphicsrun(N);
         f.add(gr);
         f.setSize(1200,900);
         f.setVisible(true);

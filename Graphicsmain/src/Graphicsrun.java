@@ -14,12 +14,21 @@ import java.util.ArrayList;
  * @author daniposi
  */
 public class Graphicsrun extends JPanel implements MouseListener{
+    
+    //fields for Graphicsrun
+    NodeTree N;
+    
+    //Graphicsrun constructor
+    public Graphicsrun(NodeTree T){
+        N = T; 
+    }
+
     //tree
-    NodeTree N = new NodeTree();
+    //NodeTree N = new NodeTree();
     
     //booleans for boxes clicked
     boolean B = true; 
-    boolean I = true; //initializing tree
+    //boolean I = true; //initializing tree
     boolean fClick = false;
     boolean mClick = false;
     boolean cClick = false;
@@ -35,7 +44,7 @@ public class Graphicsrun extends JPanel implements MouseListener{
     int[] kx = new int[5];
     int ky;
     
-    public void drawTree(Graphics g, NodeTree N){
+    public void drawTree(Graphics g){
     //width and height of panel    
     int width = getWidth(); 
     int height = getHeight();
@@ -136,9 +145,10 @@ public class Graphicsrun extends JPanel implements MouseListener{
         this.setBackground(Color.WHITE);
         super.paintComponent(g);
        
-        //initializing tree only once
-        if(I){
+        //initializing tree only once 
+       /* if(I){
         N.addNode("Will","Smith",'m',"Willard","Smith","Caroline","Bright");
+        N.addNode("Willard","Smith",'m',"Bob","Smith","Amy","Something");
         N.addChild(N.curr,"Willow","Smith");
         N.addChild(N.curr, "Jaden", "Smith");
         N.addChild(N.curr, "Blank", "Smith");
@@ -147,7 +157,7 @@ public class Graphicsrun extends JPanel implements MouseListener{
        //N.addSpouse(N.curr,"Jada","Pinkett");
         N.addGender(N.curr.child.get(0),'f');
         I=false;
-        }
+        }*/
         
         if(B){
         addMouseListener(this); 
@@ -172,7 +182,7 @@ public class Graphicsrun extends JPanel implements MouseListener{
         //redraws updated tree
         g.setColor(Color.WHITE); 
         this.repaint(0,0,getWidth(),getHeight());            
-        drawTree(g,N); 
+        drawTree(g); 
     }
 
     //mouse methods 

@@ -96,7 +96,11 @@ public class NodeTree {
         }
         
         public int calculateAge(int[] b, int[] d){
-            int age = d[2]-b[2];
+            int deathyear=d[2];
+            if(d[2] == 0){
+                deathyear=2015;
+            }
+            int age = deathyear-b[2];
             if(b[1] > d[1]) age--;
             else if(b[1] == d[1] && b[0] > d[0]) age--;
             return age;
@@ -456,7 +460,11 @@ public class NodeTree {
         }
         
         public String printCurrAge(){
-            return Integer.toString(curr.age);
+            if(curr.age > 0){
+                return Integer.toString(curr.age);
+            }else{
+                return "";
+            }
         }
         
         //returns a string with curr's birth and death date
@@ -465,9 +473,6 @@ public class NodeTree {
             
             if(curr.birth != null){
                 for(int i = 0; i < 3; i++){
-                    //if(i == 0){
-                    //    bd += "birth: ";
-                    //}
                     bd += Integer.toString(curr.birth[i]);
                     if(i < 2){
                         bd+= "/";
@@ -480,11 +485,8 @@ public class NodeTree {
         public String printCurrDeath(){
             String bd = "";
             
-            if(curr.death!= null){
+            if(curr.death!= null && curr.death[0] != 0){
                 for(int i = 0; i < 3; i++){
-                    //if(i == 0){
-                    //    bd += "death: ";
-                    //}
                     bd += Integer.toString(curr.death[i]);
                     if(i < 2){
                         bd+= "/";

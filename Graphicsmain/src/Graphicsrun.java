@@ -160,7 +160,6 @@ public class Graphicsrun extends JPanel implements MouseListener{
         g.drawString(s,x,y);
     }
     
-    
     public void paintComponent(Graphics g){
         this.setBackground(Color.WHITE);
         super.paintComponent(g);

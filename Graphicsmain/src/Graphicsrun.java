@@ -198,30 +198,34 @@ public class Graphicsrun extends JPanel implements MouseListener{
 
     //mouse methods 
     public void mouseClicked (MouseEvent me) {
-        int xpos = me.getX();
-        int ypos = me.getY();
-        B = !B; 
+        //only works for left mouse click
+        switch(me.getModifiers()){ 
+            case InputEvent.BUTTON1_MASK: {
+        
+                int xpos = me.getX();
+                int ypos = me.getY();
+                B = !B; 
        
-        if(xpos > fx && xpos < fx+175 && ypos > fy && ypos < fy+80){
-            fClick = true;
-        }
+                if(xpos > fx && xpos < fx+175 && ypos > fy && ypos < fy+80){
+                    fClick = true;
+                }
         
-        if(xpos > mx && xpos < mx+175 && ypos > my && ypos < my+80){
-            mClick = true;
-        }
+                if(xpos > mx && xpos < mx+175 && ypos > my && ypos < my+80){
+                    mClick = true;
+                }
         
-        
-        if(xpos > cx && xpos < cx+175 && ypos > cy && ypos < cy+80){    
-            System.out.println("click");
-            cClick = !cClick;        
-        }
+                if(xpos > cx && xpos < cx+175 && ypos > cy && ypos < cy+80){    
+                    System.out.println("click");
+                    cClick = !cClick;        
+                }
 
-        for(int i = 0; i < kClick.length; i++){
-            if(xpos > kx[i] && xpos < kx[i]+175 && ypos > ky && ypos < ky+80){
-                kClick[i] = true;
-             }
+                for(int i = 0; i < kClick.length; i++){
+                    if(xpos > kx[i] && xpos < kx[i]+175 && ypos > ky && ypos < ky+80){
+                        kClick[i] = true;
+                    }
+                }
+            }
         }
-
     }
     public void mouseEntered (MouseEvent me) {} 
     public void mousePressed (MouseEvent me) {} 

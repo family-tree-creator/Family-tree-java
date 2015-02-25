@@ -9,7 +9,8 @@
  * @author Crazypinata
  */
 import java.io.*;
-
+//filereader
+//fileinputstream
 public class ImportFile {
     public void Import(String s){
         FileReader in = null;

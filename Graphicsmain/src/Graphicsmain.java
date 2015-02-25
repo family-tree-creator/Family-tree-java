@@ -17,37 +17,84 @@ public class Graphicsmain {
     public static void main(String[] args){
         JFrame f = new JFrame("Family Tree");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        /* all temporary - can be deleted */
-        NodeTree N = new NodeTree();  
-        int[]birth = new int[3];
-        birth[0]=9;
-        birth[1]=25;
-        birth[2]=1968;
-        int[]death = new int[3];
-        N.addNode("Will","Smith",'m',birth,death,"Willard","Smith","Caroline","Bright"); //temp
-        /* end of temp to delete  */
-        
+        NodeTree N = new NodeTree();
+        N.addNode("Will","Smith",'m',"Willard","Smith","Caroline","Bright");
         Graphicsrun gr = new Graphicsrun(N);
         f.add(gr);
         f.setSize(1200,900);
         f.setVisible(true);
+        //Import("test1.txt");
         //testTree();
     }
   
-    public static void Import(String s){
+    public static NodeTree Import(String s){
         FileReader in = null;
+        NodeTree N = new NodeTree();
         try{
             in = new FileReader(s);
             BufferedReader br = new BufferedReader(in);
             String check;
             while((check = br.readLine()) != null){
-                System.out.println(check);
+                //System.out.println(check);
+                MakeNode(N, check);
+                
             }
             in.close();
         }catch(IOException failRead) { //add catch for unable to open file
             System.err.println(failRead.getMessage());
         }
+        return N;
+    }
+    
+    public static void MakeNode(NodeTree T, String input){
+        String[] info = input.split(";");
+        //check for right size and has first and last name
+        if(info.length < 10){
+            System.err.println(info.length);
+            System.err.println("Not enough info to make a node");
+            return;
+        }
+        char gender = ' ';
+        int[] birth = null;
+        int[] death = null;
+        TupleList child = null;
+        String[] bdate;
+        String[] ddate;
+        String[] children;
+        String[] c;
+        if(info[2].equalsIgnoreCase("Male")) gender = 'm';
+        else if(info[2].equalsIgnoreCase("Female")) gender = 'f';
+        else gender = ' ';
+        //else throw error
+        if(!info[3].equals("")){
+            birth = new int[3];
+            bdate = info[3].split("-");
+            for(int i = 0; i < 3; i++){
+                birth[i] = Integer.valueOf(bdate[i]);
+            }
+        }
+        if(!info[4].equals("")){
+            death = new int[3];
+            ddate = info[3].split("-");
+            for(int i = 0; i < 3; i++){
+                death[i] = Integer.valueOf(ddate[i]);
+            }
+        }
+        if(!info[9].equals("")){
+            child = new TupleList();
+            children = info[9].split(",");
+            for(int i = 0; i < children.length; i++){
+                c = children[i].split(" ");
+                child.add(c[0], c[1]);
+            }
+        }
+        System.out.println("ff:"+info[5]+" fl:"+info[6]+" mf:"+info[7]+" ml:"+info[8]);
+        
+        T.addNode(info[0], info[1], gender, birth, death, info[5], info[6], info[7], info[8], child);
+        //System.out.println(T.printCurrNode());
+        
+        
+        
     }
     
     public static void testTree(){

@@ -14,6 +14,7 @@ import java.util.ArrayList;
  * @author daniposi
  */
 public class Graphicsrun extends JPanel implements MouseListener{
+    
     //fields for Graphicsrun
     NodeTree N;
     
@@ -27,6 +28,7 @@ public class Graphicsrun extends JPanel implements MouseListener{
     
     //booleans for boxes clicked
     boolean B = true; 
+    //boolean I = true; //initializing tree
     boolean fClick = false;
     boolean mClick = false;
     boolean cClick = false;
@@ -160,9 +162,24 @@ public class Graphicsrun extends JPanel implements MouseListener{
         g.drawString(s,x,y);
     }
     
+    
     public void paintComponent(Graphics g){
         this.setBackground(Color.WHITE);
         super.paintComponent(g);
+        
+        //initializing tree only once 
+       /* if(I){
+        N.addNode("Will","Smith",'m',"Willard","Smith","Caroline","Bright");
+        N.addNode("Willard","Smith",'m',"Bob","Smith","Amy","Something");
+        N.addChild(N.curr,"Willow","Smith");
+        N.addChild(N.curr, "Jaden", "Smith");
+        N.addChild(N.curr, "Blank", "Smith");
+        N.addChild(N.curr, "hello", "Smith");
+        N.addChild(N.curr, "Tree", "Smith");
+       //N.addSpouse(N.curr,"Jada","Pinkett");
+        N.addGender(N.curr.child.get(0),'f');
+        I=false;
+        }*/
         
         if(B){
         addMouseListener(this); 
@@ -215,7 +232,7 @@ public class Graphicsrun extends JPanel implements MouseListener{
                 }
         
                 if(xpos > cx && xpos < cx+175 && ypos > cy && ypos < cy+80){    
-                    System.out.println("click");
+                    //System.out.println("click");
                     cClick = !cClick;        
                 }
 

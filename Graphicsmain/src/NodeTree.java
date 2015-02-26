@@ -1,6 +1,8 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
+import java.text.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,8 +23,8 @@ public class NodeTree {
         char gender;
         int[] birth; 
         int[] death;
-        Node mother;
         Node father;
+        Node mother;
         List<Node> spouse;
         List<Node> child;
         boolean tNode;
@@ -35,13 +37,13 @@ public class NodeTree {
             gender = ' ';
             birth = null;
             death = null; 
-            mother = null;
             father = null;
+            mother = null;
             spouse = new ArrayList();
             child = new ArrayList();
         }
         
-        //constructor w/ parameters for Names
+        //constructor w/ parameters for names
         Node(String first, String last){
             fName = first;
             lName = last;
@@ -49,13 +51,13 @@ public class NodeTree {
             gender = ' ';
             birth = null;
             death = null; 
-            mother = null;
             father = null;
+            mother = null;
             spouse = new ArrayList();
             child = new ArrayList();
         }
         
-        //constructor w/ parameter for Names and Age
+        //constructor w/ parameters for names and age
         Node(String first, String last,int a){
             fName = first;
             lName = last;
@@ -63,12 +65,13 @@ public class NodeTree {
             gender = ' ';
             birth = null;
             death = null; 
-            mother = null;
             father = null;
+            mother = null;
             spouse = new ArrayList();
             child = new ArrayList();
         }
         
+        //constructor w/ parameters for names and gender
         Node(String first, String last, char g){
             fName = first;
             lName = last;
@@ -76,12 +79,14 @@ public class NodeTree {
             gender = g;
             birth = null;
             death = null; 
-            mother = null;
             father = null;
+            mother = null;
             spouse = new ArrayList();
             child = new ArrayList();
         }
         
+        //constructor w/ parameters for names, gender, and birth/death years
+        //age determined by birth/death years
         Node(String first, String last, char g, int[] b, int[] d){
             fName = first;
             lName = last;
@@ -89,25 +94,37 @@ public class NodeTree {
             gender = g;
             birth = b;
             death = d; 
-            mother = null;
             father = null;
+            mother = null;
             spouse = new ArrayList();
             child = new ArrayList();
         }
         
-        public int calculateAge(int[] b, int[] d){
+        //calculates age by using birth/death years
+        private int calculateAge(int[] b, int[] d){
+            //gets and stores current date values
+            Date date = new Date();
+            SimpleDateFormat dy = new SimpleDateFormat("y");
+            SimpleDateFormat dm = new SimpleDateFormat("M");
+            SimpleDateFormat dd = new SimpleDateFormat("d");
+            int currYear = Integer.parseInt(dy.format(date));
+            int currMonth = Integer.parseInt(dm.format(date));
+            int currDay = Integer.parseInt(dd.format(date));    
+            
             int age;
+            
             if (d != null){
                 age = d[2]-b[2];
                 if(b[1] > d[1]) age--;
                 else if(b[1] == d[1] && b[0] > d[0]) age--;
                 return age;
-            }else if(b != null){
-                age = 2015-b[2];
+            }else if(b != null){           
+                age = currYear-b[2];
+                if(b[1] > currMonth) age--;
+                else if(b[1] == currMonth && b[0] > currDay) age--;
                 return age;
             }else return 0;
         }
-        
     }
     
         //fields for NodeTree class
@@ -123,7 +140,7 @@ public class NodeTree {
         }
         
         //Operations
-        //creats a simple node not attached to anything
+        //creates a simple node not attached to anything
         public void addNode(String first, String last){
             Node N = new Node(first,last);
             if(familySize == 0){
@@ -502,19 +519,22 @@ public class NodeTree {
         }
         
         public String printCurrAge(){
-            return Integer.toString(curr.age);
+            if(curr.age > 0){
+                return Integer.toString(curr.age);
+            }else{
+                return "";
+            }
         }
         
         //returns a string with curr's birth and death date
         public String printCurrBirth(){
             String bd = "";
-            for(int i = 0; i < 3; i++){
-                //if(i == 0){
-                //    bd += "birth: ";
-                //}
-                bd += Integer.toString(curr.birth[i]);
-                if(i < 2){
+            if(curr.birth != null){
+                for(int i = 0; i < 3; i++){
+                  bd += Integer.toString(curr.birth[i]);
+                  if(i < 2){
                     bd+= "/";
+                    }
                 }
             }
             return bd;
@@ -522,13 +542,12 @@ public class NodeTree {
         
         public String printCurrDeath(){
             String bd = "";
-            for(int i = 0; i < 3; i++){
-                //if(i == 0){
-                //    bd += "death: ";
-                //}
-                bd += Integer.toString(curr.death[i]);
-                if(i < 2){
-                    bd+= "/";
+            if(curr.death != null){
+                for(int i = 0; i < 3; i++){
+                    bd += Integer.toString(curr.death[i]);
+                    if(i < 2){
+                        bd+= "/";
+                    }
                 }
             }
             return bd;

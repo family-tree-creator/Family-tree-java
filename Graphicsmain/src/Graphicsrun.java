@@ -121,7 +121,8 @@ public class Graphicsrun extends JPanel implements MouseListener{
     for(int i = 0; i < N.curr.child.size(); i++){
         kx[i] = spacing + i * 240;
         createBox(g,kx[i],ky);
-        createText(g,N.printName(N.curr.child.get(i)),kx[i] + 40 , height/2 + 200);
+        createText(g,N.printName(N.curr.child.get(i)),kx[i] + 40 , 
+                   height/2 + 200);
         createLine(g,kx[i] + 87, ky, kx[i] + 87,ky-60);
     }
     }
@@ -237,7 +238,8 @@ public class Graphicsrun extends JPanel implements MouseListener{
                 }
 
                 for(int i = 0; i < kClick.length; i++){
-                    if(xpos > kx[i] && xpos < kx[i]+175 && ypos > ky && ypos < ky+80){
+                    if(xpos > kx[i] && xpos < kx[i]+175 && ypos > ky 
+                       && ypos < ky+80){
                         kClick[i] = true;
                     }
                 }

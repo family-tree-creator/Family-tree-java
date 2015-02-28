@@ -23,8 +23,8 @@ public class NodeTree {
         char gender;
         int[] birth; 
         int[] death;
-        Node father;
         Node mother;
+        Node father;
         List<Node> spouse;
         List<Node> child;
         boolean tNode;
@@ -37,13 +37,13 @@ public class NodeTree {
             gender = ' ';
             birth = null;
             death = null; 
-            father = null;
             mother = null;
+            father = null;
             spouse = new ArrayList();
             child = new ArrayList();
         }
         
-        //constructor w/ parameters for names
+        //constructor w/ parameters for Names
         Node(String first, String last){
             fName = first;
             lName = last;
@@ -51,27 +51,28 @@ public class NodeTree {
             gender = ' ';
             birth = null;
             death = null; 
-            father = null;
             mother = null;
+            father = null;
             spouse = new ArrayList();
             child = new ArrayList();
         }
         
-        //constructor w/ parameters for names and age
-        Node(String first, String last,int a){
+        //constructor w/ parameter for Names and Age
+        /*Node(String first, String last,int a){
             fName = first;
             lName = last;
             age = a;
             gender = ' ';
             birth = null;
             death = null; 
-            father = null;
             mother = null;
+            father = null;
             spouse = new ArrayList();
             child = new ArrayList();
         }
+        */
         
-        //constructor w/ parameters for names and gender
+        //constructor w/ parameter for Names and Gender
         Node(String first, String last, char g){
             fName = first;
             lName = last;
@@ -79,14 +80,13 @@ public class NodeTree {
             gender = g;
             birth = null;
             death = null; 
-            father = null;
             mother = null;
+            father = null;
             spouse = new ArrayList();
             child = new ArrayList();
         }
         
-        //constructor w/ parameters for names, gender, and birth/death years
-        //age determined by birth/death years
+        //constructor w/ parameter for Names, Gender, birth and death dates
         Node(String first, String last, char g, int[] b, int[] d){
             fName = first;
             lName = last;
@@ -94,13 +94,13 @@ public class NodeTree {
             gender = g;
             birth = b;
             death = d; 
-            father = null;
             mother = null;
+            father = null;
             spouse = new ArrayList();
             child = new ArrayList();
         }
         
-        //calculates age by using birth/death years
+        //calculates age from birth date with death date or current data
         private int calculateAge(int[] b, int[] d){
             //gets and stores current date values
             Date date = new Date();
@@ -140,17 +140,20 @@ public class NodeTree {
         }
         
         //Operations
-        //creates a simple node not attached to anything
-        public void addNode(String first, String last){
+        //creats a simple node not attached to anything (Made for testing)
+        /*public void addNode(String first, String last){
             Node N = new Node(first,last);
             if(familySize == 0){
                 root = N; 
                 curr = N;
             }
         }
+        */
         
-        //creates a simple node and a tree but not spouses
-        public void addNode(String first, String last, char gender, String ffirst, String flast, String mfirst, String mlast){
+        //creates a simple node and a tree but not spouses (Made for testing)
+        public void addNode(String first, String last, char gender, 
+                            String ffirst, String flast, String mfirst, 
+                            String mlast){
             Node N = new Node(first,last,gender);
             addtNode(N, false);
             Node temp;
@@ -160,9 +163,9 @@ public class NodeTree {
                 curr = N;
             }
             else{
-                System.out.println("start1 "+first+" "+last);
+                //System.out.println("start1 "+first+" "+last);
                 temp = findPerson(root,null,first,last,true);
-                System.out.println();
+                //System.out.println();
                 if(temp != null){
                     Node temp2;
                     for(int i = 0; i < temp.child.size(); i++){
@@ -186,8 +189,10 @@ public class NodeTree {
             addMother(N, mfirst, mlast);
         }
         
-        //creates a full node and a tree (spouses to be added)
-        public void addNode(String first, String last, char gender,  int[] birth, int[] death, String ffirst, String flast, String mfirst, String mlast){
+        //creates a full node and a tree (Made for testing)
+        /*public void addNode(String first, String last, char gender, 
+                            int[] birth, int[] death, String ffirst, 
+                            String flast, String mfirst, String mlast){
             Node N = new Node(first,last, gender, birth, death);
             addtNode(N, false);
             Node temp;
@@ -196,9 +201,9 @@ public class NodeTree {
                 curr = N;
             }
             else{
-                System.out.println("startN "+first+" "+last);
+                //System.out.println("startN "+first+" "+last);
                 temp = findPerson(root,null,first,last, true);
-                System.out.println();
+                //System.out.println();
                 if(temp != null){
                     Node temp2;
                     for(int i = 0; i < temp.child.size(); i++){
@@ -219,8 +224,11 @@ public class NodeTree {
             //addSpouse
             familySize++;
         }
-        
-        public void addNode(String first, String last, char gender,  int[] birth, int[] death, String ffirst, String flast, String mfirst, String mlast, TupleList childs){
+        */
+        //create a full node with children and a tree (Final version)
+        public void addNode(String first, String last, char gender, int[] birth,
+                            int[] death, String ffirst, String flast, 
+                            String mfirst, String mlast, TupleList childs){
             Node N = new Node(first,last, gender, birth, death);
             addtNode(N, false);
             Node temp;
@@ -229,9 +237,9 @@ public class NodeTree {
                 curr = N;
             }
             else{
-                System.out.println("start "+first+" "+last);
+                //System.out.println("start "+first+" "+last);
                 temp = findPerson(root,null,first,last, true);
-                System.out.println();
+                //System.out.println();
                 if(temp != null){
                     Node temp2;
                     for(int i = 0; i < temp.child.size(); i++){
@@ -247,8 +255,10 @@ public class NodeTree {
                     //addSpouse
                 }
             }
-            if(!ffirst.equals("") && !flast.equals("")) addFather(N, ffirst, flast);
-            if(!ffirst.equals("") && !flast.equals("")) addMother(N, mfirst, mlast);
+            if(!ffirst.equals("") && !flast.equals("")) 
+                addFather(N, ffirst, flast);
+            if(!ffirst.equals("") && !flast.equals("")) 
+                addMother(N, mfirst, mlast);
             //System.out.println("child stuff");
             if(childs != null) addChild(N, childs);
             //System.out.println("child stuff end");
@@ -259,35 +269,35 @@ public class NodeTree {
             familySize++;
         }
         
-        //public Node makeNode(String first, String last, char gender, String ffirst, String flast, String mfirst, String mlast){
-          
-        
-        //}
-        
-        public void addFname(Node p, String first){
+        //add first name to node (Made for testing)
+        /*public void addFname(Node p, String first){
             //check != null
             p.fName = first;
         }
         
+        //add last name to node (Made for testing)
         public void addLname(Node p, String last){
             //check != null
             p.lName = last;
         }
         
+        //add age to node (Made for testing)
         public void addAge(Node p, int a){
             //check > 0
             p.age = a;
         }
         
+        //add gender to node (Made for testing)
         public void addGender(Node p, char g){
             //check if f or m
             if(g != 'f' && g != 'm'){
-                throw new RuntimeException("NodeTree Error: addGender(Node p, char g)"
+                throw new RuntimeException(
+                            "NodeTree Error: addGender(Node p, char g)"
                         + " must be given either 'f' or 'm'.");
             }
             p.gender = g;
         }
-        
+        */
         //add m to c.mother and replaces m's temp child with real
         public void addMother(Node c, Node m){
             c.mother = m;
@@ -305,9 +315,9 @@ public class NodeTree {
         
         //creates a temp mother and connects to child
         public void addMother(Node c, String mfirst, String mlast){
-            System.out.println("startMs "+mfirst+" "+mlast+" "+printName(c));
+            //System.out.println("startMs "+mfirst+" "+mlast+" "+printName(c));
             Node temp = findPerson(root,null,mfirst,mlast, true);
-            System.out.println();
+            //System.out.println();
             if(temp == null){
                 temp = new Node(mfirst,mlast,'f');
                 addtNode(temp, true);
@@ -334,9 +344,9 @@ public class NodeTree {
         
         //creates a temp father and connects to child
         public void addFather(Node c, String ffirst, String flast){
-            System.out.println("startFs "+ffirst+" "+flast+" "+printName(c));
+            //System.out.println("startFs "+ffirst+" "+flast+" "+printName(c));
             Node temp = findPerson(root,null, ffirst, flast, true);
-            System.out.println();
+            //System.out.println();
             if(temp == null){
                 temp = new Node(ffirst, flast,'m');
                 addtNode(temp, true);
@@ -346,8 +356,8 @@ public class NodeTree {
             //addChild(temp,c);
         }
         
-        //to be worked on
-        public void addSpouse(Node C, String first, String last){
+        //spouses not added into final version
+        /*public void addSpouse(Node C, String first, String last){
             Node S = new Node(first,last);
             
             //check if spouse already spouse
@@ -360,6 +370,7 @@ public class NodeTree {
             C.spouse.add(S);
             familySize++;
         }
+        */
         
         //creates temp child node and connects to parent
         public void addChild(Node P, String first, String last){
@@ -367,7 +378,8 @@ public class NodeTree {
             
             //check if child already child of parent
             for(int i = 0; i < P.child.size(); i++){
-                if (first.equals(P.child.get(i).fName) && last.equals(P.child.get(i).lName)){
+                if (first.equals(P.child.get(i).fName) 
+                    && last.equals(P.child.get(i).lName)){
                     return;
                 }    
             }
@@ -392,20 +404,23 @@ public class NodeTree {
             //else if(P.gender == 'f') addMother(C,P);
         }
         
+      //takes a TupleList of children and adds children to parent if not already
         public void addChild(Node P, TupleList check){
             Node temp;
             for(int i = 0; i < P.child.size(); i++){
                 temp = P.child.get(i);
                 //System.out.println(Integer.toString(check.size()));
                 for(int j = 0; i < check.size(); j++){
-                    if(temp.fName.equals(check.getFirst(j)) && temp.lName.equals(check.getSecond(j))){
+                    if(temp.fName.equals(check.getFirst(j)) 
+                       && temp.lName.equals(check.getSecond(j))){
                         check.remove(j);
                         break;
                     }
                 }
             }
             for(int k = 0; k < check.size(); k++){
-                temp = findPerson(root,null,check.getFirst(k),check.getSecond(k),true);
+                temp = findPerson(root,null,check.getFirst(k),
+                                  check.getSecond(k),true);
                 if(temp != null){
                     addChild(P,temp);
                     if(P.gender == 'm') addFather(temp,P);
@@ -419,13 +434,14 @@ public class NodeTree {
             }
         }
         
-        //adds the tag of temp node
+        //adds the tag of temp node (Made for testing)
         public void addtNode(Node N, boolean temp){
             N.tNode = temp;
         }
         
         //finds a node in the tree with same first and last name
-        public Node findPerson(Node R, Node C, String first, String last, boolean searchP){
+        public Node findPerson(Node R, Node C, String first, String last, 
+                               boolean searchP){
             if(R == null) return null;
             //if(C != null) System.out.println(printName(R)+" "+printName(C));
             if(R.fName.equals(first) && R.lName.equals(last)){
@@ -451,12 +467,17 @@ public class NodeTree {
                 child = R.child.get(i);
                 //if(R.child.get(i) != C){
                 if(C != null){
-                    System.out.println("R:"+printName(R)+" C:"+printName(C)+" child:"+printName(child));
-                    if(!child.fName.equals(C.fName) || !child.lName.equals(C.lName)){
+                    System.out.println("R:"+printName(R)+" C:"+printName(C)
+                                       +" child:"+printName(child));
+                    if(!child.fName.equals(C.fName) 
+                       || !child.lName.equals(C.lName)){
                         //System.out.println("startFc "+first+" "+last);
                         if(child != null)
-                        //System.out.println("R:"+printName(R)+" C:"+printName(C)+" child:"+printName(child));
-                        temp = findPerson(R.child.get(i), R, first, last, i == 0);
+                        //System.out.println("R:"+printName(R)+" C:
+                        //                     +printName(C)+" 
+                        //                     child:"+printName(child));
+                        temp = findPerson(R.child.get(i), R, first, last, 
+                                          i == 0);
                         //System.out.println();
                         if(temp != null){
                             return temp;
@@ -467,10 +488,11 @@ public class NodeTree {
             return null;
         }
         
+        //returns root of the tree
         public Node getRoot(){
             return root;
         }
-        
+        // returns the current node of the tree
         public Node getCurr(){
             return curr;
         }
@@ -499,6 +521,7 @@ public class NodeTree {
             System.out.println("nope");
         }
         
+        //makes curr equal to curr's child with same index in curr's child list
         public void tChild(int index){
             if(index < curr.child.size()){
                 curr = curr.child.get(index);
@@ -507,7 +530,7 @@ public class NodeTree {
             System.out.println("nope");
         }
     
-        //returns a string with node's name
+        //returns a string with a nodes's name
         public String printName(Node p){
           String s = p.fName + " " + p.lName;
           return s;
@@ -518,6 +541,7 @@ public class NodeTree {
             return curr.fName + " " + curr.lName;
         }
         
+        //returns a string with curr's age
         public String printCurrAge(){
             if(curr.age > 0){
                 return Integer.toString(curr.age);
@@ -526,7 +550,7 @@ public class NodeTree {
             }
         }
         
-        //returns a string with curr's birth and death date
+        //returns a string with curr's birth
         public String printCurrBirth(){
             String bd = "";
             if(curr.birth != null){
@@ -540,6 +564,7 @@ public class NodeTree {
             return bd;
         }
         
+        //returns a string with curr's death date
         public String printCurrDeath(){
             String bd = "";
             if(curr.death != null){
@@ -556,19 +581,21 @@ public class NodeTree {
         //returns string with curr's full info
         public String printCurrNode(){
             //String node = "";
-            return printCurrName() + ", age: " + printCurrAge() + ", birth: " + printCurrBirth() + ", death: " + printCurrDeath();
+            return printCurrName() + ", age: " + printCurrAge() + ", birth: " 
+                   + printCurrBirth() + ", death: " + printCurrDeath();
         }
         
-        //prints the temp flag
+        //prints the temp flag status
         public void printTNode(Node N){
             System.out.println(N.tNode);
         }
         
-        //returns number of childrend a node has
+        //returns number of children a node has
         public int numOfChild(Node N){
             return N.child.size();
         }
         
+        //returns number of children curr has
         public int currNumC(){
             return curr.child.size();
         }

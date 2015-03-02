@@ -14,13 +14,9 @@ public class Graphicsrun extends JPanel implements MouseListener{
     public Graphicsrun(NodeTree T){
         N = T; 
     }
-
-    //tree
-    //NodeTree N = new NodeTree();
     
     //booleans for boxes clicked
     boolean B = true; 
-    //boolean I = true; //initializing tree
     boolean fClick = false;
     boolean mClick = false;
     boolean cClick = false;
@@ -88,6 +84,7 @@ public class Graphicsrun extends JPanel implements MouseListener{
     ky = height/2 + 160;    
     }
  
+    //sets spacing to vary by amount of children
     if(N.curr.child.size() == 1){
         spacing = width/2 - 87;
     }else if(N.curr.child.size() == 2){
@@ -119,13 +116,13 @@ public class Graphicsrun extends JPanel implements MouseListener{
     }
     }
     
-    
     //draws current individual 
     public void drawIndTree(Graphics g){
         //width and height of panel    
         int width = getWidth(); 
         int height = getHeight();   
     
+        //width and height of current box
         cx = width/2 - 87;
         cy = height/2 - 40;
         
@@ -140,8 +137,7 @@ public class Graphicsrun extends JPanel implements MouseListener{
         createText(g,"Gender: " + N.curr.gender,cx, cy + 160);
     }
     
-    
-    //drawing tools
+    //drawing tools: box, line, text
     public void createBox(Graphics g, int x, int y){
         g.setColor(Color.YELLOW);
         g.fillRect(x,y,175,80);
@@ -155,50 +151,40 @@ public class Graphicsrun extends JPanel implements MouseListener{
         g.drawString(s,x,y);
     }
     
-    
+    //controls what is displayed
     public void paintComponent(Graphics g){
+        //default background
         this.setBackground(Color.WHITE);
         super.paintComponent(g);
         
-        //initializing tree only once 
-       /* if(I){
-        N.addNode("Will","Smith",'m',"Willard","Smith","Caroline","Bright");
-        N.addNode("Willard","Smith",'m',"Bob","Smith","Amy","Something");
-        N.addChild(N.curr,"Willow","Smith");
-        N.addChild(N.curr, "Jaden", "Smith");
-        N.addChild(N.curr, "Blank", "Smith");
-        N.addChild(N.curr, "hello", "Smith");
-        N.addChild(N.curr, "Tree", "Smith");
-       //N.addSpouse(N.curr,"Jada","Pinkett");
-        N.addGender(N.curr.child.get(0),'f');
-        I=false;
-        }*/
-        
+        //adds mouseListener
         if(B){
         addMouseListener(this); 
         }
         
-        //cases for changing tree
+        //3 cases for changing tree displayed:
+        //child case
         for(int i = 0; i<kClick.length;i++){
             if(kClick[i]){
             N.tChild(i);
             kClick[i]=false;
             }
         }
-         
+        //father case 
         if(fClick){
             N.tFather();
             fClick = false;
-        }else if(mClick){
+        }else if(mClick){ //mother case
             N.tMother();
             mClick = false;
         }
        
        
-       //redraws updated tree
+        //allows redrawing of panel
         g.setColor(Color.WHITE); 
         this.repaint(0,0,getWidth(),getHeight());    
         
+        //current case
         if(cClick){
             drawIndTree(g);
         }else{
@@ -211,24 +197,25 @@ public class Graphicsrun extends JPanel implements MouseListener{
         //only works for left mouse click
         switch(me.getModifiers()){ 
             case InputEvent.BUTTON1_MASK: {
-        
+                //variables to get mouse location
                 int xpos = me.getX();
                 int ypos = me.getY();
                 B = !B; 
        
+                //4 cases for which box is clicked by mouse:
+                //father case
                 if(xpos > fx && xpos < fx+175 && ypos > fy && ypos < fy+80){
                     fClick = true;
                 }
-        
+                //mother case
                 if(xpos > mx && xpos < mx+175 && ypos > my && ypos < my+80){
                     mClick = true;
                 }
-        
+                //current case
                 if(xpos > cx && xpos < cx+175 && ypos > cy && ypos < cy+80){    
-                    //System.out.println("click");
                     cClick = !cClick;        
                 }
-
+                //child case
                 for(int i = 0; i < kClick.length; i++){
                     if(xpos > kx[i] && xpos < kx[i]+175 && ypos > ky 
                        && ypos < ky+80){
@@ -238,6 +225,7 @@ public class Graphicsrun extends JPanel implements MouseListener{
             }
         }
     }
+    //unused mouse actions 
     public void mouseEntered (MouseEvent me) {} 
     public void mousePressed (MouseEvent me) {} 
     public void mouseReleased (MouseEvent me) {}  

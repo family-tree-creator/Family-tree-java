@@ -8,8 +8,6 @@ public class Graphicsmain {
     public static void main(String[] args){
         JFrame f = new JFrame("Family Tree");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //NodeTree N = new NodeTree();
-        //N.addNode("Will","Smith",'m',"Willard","Smith","Caroline","Bright");
         Graphicsrun gr = new Graphicsrun(Import("test1.txt"));
         f.add(gr);
         f.setSize(1200,900);

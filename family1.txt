@@ -1,0 +1,4 @@
+Wallace;Marcus;Male;9-25-1968;;Willard;Smith;Caroline;Bright;Julia Marcus,Greg Marcus,Peter Marcus,Marcos Marcus;end
+Caroline;Bright;Female;10-18-1948;1-30-2000;Greg;Wallace;Linda;Pace;Wallace Marcus,Sterling Schneider;end
+Willard;Smith;Male;12-26-1948;6-26-2007;Miles;Sam;Debra;Douglas;Wallace Marcus,Sterling Schneider;end
+Sterling;Schneider;Male;5-5-1893;4-8-1234;Willard;Smith;Caroline;Bright;Jay Schneider;end

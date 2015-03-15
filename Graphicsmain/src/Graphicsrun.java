@@ -1,20 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-//package graphicsrun;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.List;
 import java.util.ArrayList;
-/**
- *
- * @author daniposi
- */
+
 public class Graphicsrun extends JPanel implements MouseListener{
-    
     //fields for Graphicsrun
     NodeTree N;
     
@@ -23,12 +14,8 @@ public class Graphicsrun extends JPanel implements MouseListener{
         N = T; 
     }
 
-    //tree
-    //NodeTree N = new NodeTree();
-    
     //booleans for boxes clicked
     boolean B = true; 
-    //boolean I = true; //initializing tree
     boolean fClick = false;
     boolean mClick = false;
     boolean cClick = false;
@@ -96,6 +83,7 @@ public class Graphicsrun extends JPanel implements MouseListener{
     ky = height/2 + 160;    
     }
  
+    //determines spacing depending on number of children
     if(N.curr.child.size() == 1){
         spacing = width/2 - 87;
     }else if(N.curr.child.size() == 2){
@@ -159,7 +147,7 @@ public class Graphicsrun extends JPanel implements MouseListener{
         g.drawLine(x,y,x2,y2);
     }
     public void createText(Graphics g, String s, int x, int y){
-        g.setColor(Color.RED);
+        g.setColor(Color.BLACK);
         g.drawString(s,x,y);
     }
     
@@ -167,20 +155,6 @@ public class Graphicsrun extends JPanel implements MouseListener{
     public void paintComponent(Graphics g){
         this.setBackground(Color.WHITE);
         super.paintComponent(g);
-        
-        //initializing tree only once 
-       /* if(I){
-        N.addNode("Will","Smith",'m',"Willard","Smith","Caroline","Bright");
-        N.addNode("Willard","Smith",'m',"Bob","Smith","Amy","Something");
-        N.addChild(N.curr,"Willow","Smith");
-        N.addChild(N.curr, "Jaden", "Smith");
-        N.addChild(N.curr, "Blank", "Smith");
-        N.addChild(N.curr, "hello", "Smith");
-        N.addChild(N.curr, "Tree", "Smith");
-       //N.addSpouse(N.curr,"Jada","Pinkett");
-        N.addGender(N.curr.child.get(0),'f');
-        I=false;
-        }*/
         
         if(B){
         addMouseListener(this); 
@@ -219,24 +193,25 @@ public class Graphicsrun extends JPanel implements MouseListener{
         //only works for left mouse click
         switch(me.getModifiers()){ 
             case InputEvent.BUTTON1_MASK: {
-        
+                
+                //coordinates of mouse
                 int xpos = me.getX();
                 int ypos = me.getY();
                 B = !B; 
        
+                //father box clicked
                 if(xpos > fx && xpos < fx+175 && ypos > fy && ypos < fy+80){
                     fClick = true;
                 }
-        
+                //mother box clicked
                 if(xpos > mx && xpos < mx+175 && ypos > my && ypos < my+80){
                     mClick = true;
                 }
-        
+                //center box clicked
                 if(xpos > cx && xpos < cx+175 && ypos > cy && ypos < cy+80){    
-                    //System.out.println("click");
                     cClick = !cClick;        
                 }
-
+                //child box clicked
                 for(int i = 0; i < kClick.length; i++){
                     if(xpos > kx[i] && xpos < kx[i]+175 && ypos > ky 
                        && ypos < ky+80){
@@ -250,5 +225,4 @@ public class Graphicsrun extends JPanel implements MouseListener{
     public void mousePressed (MouseEvent me) {} 
     public void mouseReleased (MouseEvent me) {}  
     public void mouseExited (MouseEvent me) {}  
-
 }

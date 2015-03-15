@@ -1,19 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author Crazypinata
- */
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import javax.swing.*;
-//filereader
-//fileinputstream
+
 public class ImportFile extends JFrame {
     boolean hasFile = false;
     File sf;
@@ -25,12 +15,10 @@ public class ImportFile extends JFrame {
         contain.setLayout(new BoxLayout(contain, BoxLayout.PAGE_AXIS));
         JButton open = new JButton("Open");
         JLabel instruction1 = new JLabel(
-                           "Select a file to open in the family tree program.");
-        JLabel instruction2 = new JLabel("To navigate in the tree click the parents or children ");
-        JLabel instruction3 = new JLabel("of the current person.");
-        JLabel instruction4 = new JLabel(" Click on the current person to view thier infomation.");
-        //float y = 200;
-        //instructions.setAlignmentX(y);
+                           " Select a file to open in the family tree program.");
+        JLabel instruction2 = new JLabel(" To navigate in the tree click the parents or children ");
+        JLabel instruction3 = new JLabel(" of the current person.");
+        JLabel instruction4 = new JLabel(" Click on the current person to view their infomation.");
         open.addActionListener( new ActionListener() {
             public void actionPerformed(ActionEvent ae){
                 JFileChooser choose = new JFileChooser();
@@ -56,7 +44,7 @@ public class ImportFile extends JFrame {
         return hasFile;
     }
     
-    public NodeTree Import(){//String s){
+    public NodeTree Import(){
         NodeTree N = new NodeTree();
         FileReader in = null;
         try{
@@ -115,13 +103,8 @@ public class ImportFile extends JFrame {
                 child.add(c[0], c[1]);
             }
         }
-        //System.out.println("ff:"+info[5]+" fl:"+info[6]+" mf:"+info[7]+" ml:"+info[8]);
         
         T.addNode(info[0], info[1], gender, birth, death, info[5], info[6], 
-                  info[7], info[8], child);
-        //System.out.println(T.printCurrNode());
-        
-        
-        
+                  info[7], info[8], child);        
     }
 }
